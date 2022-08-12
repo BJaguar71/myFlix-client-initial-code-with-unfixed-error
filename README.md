@@ -7,4 +7,4 @@ is a movie app build with React that have multiple views and it allows users to 
 - MyFlix [API] ()
 
 #### Autor
-Maryam Hanifi (https://github.com/BJaguar71)
+[Maryam Hanifi](https://github.com/BJaguar71)
