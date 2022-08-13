@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/BJaguar71/myFlix-client.git"
   },
-  "author": "",
+  "author": "Maryam Hanifi",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/BJaguar71/myFlix-client/issues"
@@ -20,5 +20,11 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "alias": {
+    "process": false
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.0-rc.0"
   }
 }
