@@ -1,5 +1,8 @@
 // Importing React to create the component
 import React from  'react';
+
+// importing MovieCard component
+import { MovieCard } from '../movie-card/movie-card';
 // Making and exposing the MainView component in order to be usable in other files using the React.Component template
 export class MainView extends React.Component {
 
