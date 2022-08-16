@@ -20,8 +20,13 @@ export class MainView extends React.Component {
       ],
   // Rendering the visual representation of the component
   render () {
+
+    if (movies.length === 0) return <div className="main-view">The list is empty!</div>;
+
     return (
       <div className="main-view">
+        {selectedMovie
+        ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
       </div>
     );
   }
