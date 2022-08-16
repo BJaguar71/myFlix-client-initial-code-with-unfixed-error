@@ -15,9 +15,6 @@ export class MainView extends React.Component {
   render () {
     return (
       <div className="main-view">
-        <div>Paris Is Burning</div>
-        <div>Boy I Am</div>
-        <div>There's Something In The Water</div>
       </div>
     );
   }
