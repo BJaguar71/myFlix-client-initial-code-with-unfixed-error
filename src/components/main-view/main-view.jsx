@@ -20,7 +20,18 @@ export class MainView extends React.Component {
       selectedMovie: null
     };
   }
-
+  // fetching list of movies from t-flix API using axios's get method
+  componentDidMount(){
+    axios.get('https://t-flix.herokuapp.com/movies')
+    .then(response => {
+      this.setState({
+        movies: response.data
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }
   // creating setSelectedMovie component
   setSelectedMovie(newSelectedMovie) {
     this.setState({
