@@ -1,6 +1,9 @@
 // Importing React to create the component
 import React from  'react';
 
+// Importing axios
+import axios from 'axios';
+
 // importing MovieCard component
 import { MovieCard } from '../movie-card/movie-card';
 
