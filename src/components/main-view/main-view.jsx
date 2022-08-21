@@ -4,6 +4,8 @@ import React from  'react';
 // Importing axios
 import axios from 'axios';
 
+import './main-view.scss';
+
 // importing MovieCard component
 import { MovieCard } from '../movie-card/movie-card';
 
