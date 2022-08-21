@@ -1,5 +1,8 @@
 import React from 'react';
 
+// importing PropTyes
+import PropTypes from 'prop-types';
+
 export class MovieCard extends React.Component {
   render() {
     const { movie, onMovieClick } = this.props;
