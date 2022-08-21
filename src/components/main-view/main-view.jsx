@@ -6,6 +6,9 @@ import axios from 'axios';
 
 import './main-view.scss';
 
+// importing RegistrationView
+import { RegistrationView } from '../registration-view/registration-view';
+
 // importing MovieCard component
 import { MovieCard } from '../movie-card/movie-card';
 
