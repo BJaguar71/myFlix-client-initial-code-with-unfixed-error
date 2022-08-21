@@ -9,6 +9,10 @@ export class MovieView extends React.Component {
     console.log(event.key);
   }
 
+  componentDidMount() {
+    document.addEventListener('keypress', this.keypressCallback)
+  }
+
   render() {
     const { movie, onBackClick } = this.props;
     return (
