@@ -15,3 +15,24 @@ export class MovieCard extends React.Component {
   }
 }
 
+/* setting the static proptypes to an obj contains special values provided by proptypes */
+MovieCard.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string
+    }),
+    Summary: PropTypes.string.isRequired,
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Bio: PropTypes.string.isRequired,
+      Image: PropTypes.string.isRequired
+    }),
+    Actors: PropTypes.array.isRequired,
+    Image: PropTypes.string.isRequired,
+    Year: PropTypes.number.isRequired,
+    Featured: PropTypes.bool
+  }).isRequired,
+  onMovieClick: PropTypes.func.isRequired
+};
