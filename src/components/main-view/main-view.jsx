@@ -78,6 +78,8 @@ export class MainView extends React.Component {
 
     return (
       <div className="main-view">
+        {/*if the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned*/}
+      
         {selectedMovie
         ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
 
