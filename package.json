@@ -19,6 +19,7 @@
   "homepage": "https://github.com/BJaguar71/myFlix-client#readme",
   "dependencies": {
     "axios": "^0.27.2",
+    "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -26,6 +27,7 @@
     "process": false
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.7.0"
+    "@parcel/transformer-sass": "^2.7.0",
+    "buffer": "^6.0.3"
   }
 }
