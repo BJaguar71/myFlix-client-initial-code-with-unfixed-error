@@ -43,9 +43,13 @@ export class MainView extends React.Component {
     });
   }
   // creating setSelectedMovie component
-  setSelectedMovie(newSelectedMovie) {
+  /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
+  setSelectedMovie(movie) {
     this.setState({
-      selectedMovie: newSelectedMovie
+      selectedMovie: movie
+    });
+  }
+
     });
   }
   // Rendering the visual representation of the component
