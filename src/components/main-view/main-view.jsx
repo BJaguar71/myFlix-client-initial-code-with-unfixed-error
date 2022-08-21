@@ -9,6 +9,9 @@ import './main-view.scss';
 // importing RegistrationView
 import { RegistrationView } from '../registration-view/registration-view';
 
+// importing LoginView component
+import { LoginView } from '../login-view/login-view';
+
 // importing MovieCard component
 import { MovieCard } from '../movie-card/movie-card';
 
