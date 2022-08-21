@@ -23,6 +23,7 @@ export class MainView extends React.Component {
 
   constructor(){
     super();
+    // initial state is set to null
     this.state = {
       movies: [],
       selectedMovie: null
