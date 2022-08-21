@@ -50,6 +50,13 @@ export class MainView extends React.Component {
     });
   }
 
+  // when a user successfully registers
+  onRegistration(register) {
+    this.setState({
+      register,
+    });
+  }
+
     });
   }
   // Rendering the visual representation of the component
