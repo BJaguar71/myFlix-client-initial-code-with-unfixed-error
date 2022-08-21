@@ -1,0 +1,46 @@
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import './registration-view.scss';
+
+
+export function RegistrationView(props) {
+  const [ username, setUsername ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ birthdate, setBirthdate ] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(username, password, email, birthdate);
+    /* Send a request to the server for authentication */
+    /* then call props on registored user(username) */
+    props.onRegistration(username);
+  };
+
+  return(
+    <form>
+      <lable>
+        Username:
+        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+      </lable>
+      <lable>
+        Password:
+        <input type="password" value={[password]} onChange={e => setPassword(e.target.value)} />
+      </lable>
+      <lable>
+        Email:
+        <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+      </lable>
+      <lable>
+        Birthdate:
+        <input type="date" value={birthdate} onChange={e => setBirthdate(e.target.value)} />
+      </lable>
+      <button className="registration-button" type="submit" onClick={handleSubmit}>Register</button> 
+    </form>
+  );
+}
+
+RegistrationView.propTypes = {
+  onRegistration: PropTypes.func.isRequired
+};
