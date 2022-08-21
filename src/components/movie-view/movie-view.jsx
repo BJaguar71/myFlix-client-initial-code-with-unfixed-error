@@ -5,6 +5,10 @@ import './movie-view.scss';
 
 export class MovieView extends React.Component {
 
+  keypressCallback(event) {
+    console.log(event.key);
+  }
+
   render() {
     const { movie, onBackClick } = this.props;
     return (
