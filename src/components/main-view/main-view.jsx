@@ -26,7 +26,8 @@ export class MainView extends React.Component {
     // initial state is set to null
     this.state = {
       movies: [],
-      selectedMovie: null
+      selectedMovie: null,
+      user: null
     };
   }
   // fetching list of movies from t-flix API using axios's get method
