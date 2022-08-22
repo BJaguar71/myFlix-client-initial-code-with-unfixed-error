@@ -25655,7 +25655,7 @@ class MovieView extends (0, _reactDefault.default).Component {
         }, this);
     }
 }
-MovieView.PropTypes = {
+MovieView.propTypes = {
     movie: (0, _propTypesDefault.default).shape({
         Title: (0, _propTypesDefault.default).string.isRequired,
         Genre: (0, _propTypesDefault.default).shape({
@@ -25672,8 +25672,7 @@ MovieView.PropTypes = {
         Image: (0, _propTypesDefault.default).string.isRequired,
         Year: (0, _propTypesDefault.default).number.isRequired,
         Featured: (0, _propTypesDefault.default).bool
-    }).isRequired,
-    onMovieClick: (0, _propTypesDefault.default).func.isRequired
+    }).isRequired
 };
 
   $parcel$ReactRefreshHelpers$e9f6.postlude(module);
@@ -28976,7 +28975,7 @@ function LoginView(props) {
 }
 _s(LoginView, "9FY2cPL9VBDmuhjwpF2ik6flsHs=");
 _c = LoginView;
-LoginView.PropTypes = {
+LoginView.propTypes = {
     user: (0, _propTypesDefault.default).shape({
         username: (0, _propTypesDefault.default).string.isRequired,
         password: (0, _propTypesDefault.default).string.isRequired
