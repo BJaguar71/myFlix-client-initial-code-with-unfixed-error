@@ -78,5 +78,6 @@ MovieView.propTypes = {
     Image: PropTypes.string.isRequired,
     Year: PropTypes.number.isRequired,
     Featured: PropTypes.bool
-  }).isRequired
+  }).isRequired,
+  onBackClick: PropTypes.func.isRequired
 };
