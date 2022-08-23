@@ -10,6 +10,8 @@ import Col from 'react-bootstrap/Col';
 
 import { Container, Nav, Navbar } from 'react-bootstrap';
 
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 import './main-view.scss';
 
 // importing RegistrationView
