@@ -16,7 +16,7 @@ export class MovieCard extends React.Component {
         <Card.Body className="movie-card">
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>{movie.Summary}</Card.Text>
-          <Button onClick={() => onMovieClick(movie)} variant="link">Open</Button>
+          <Button className="movie-button" onClick={() => onMovieClick(movie)} variant="link">Open</Button>
         </Card.Body>
       </Card>
     );
