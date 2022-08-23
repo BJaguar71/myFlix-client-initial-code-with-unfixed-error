@@ -85,20 +85,38 @@ export class MainView extends React.Component {
     if (movies.length === 0) return <div className="main-view" />;
 
     return (
-      <Row className="main-view justify-content-md-center">
-        {selectedMovie
-          ? (
-            <Col md={8}>
-              <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-            </Col>
-          )
-          : movies.map(movie => (
-            <Col md={3}>
-              <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
-            </Col>
-          ))
-        }
-    </Row>
+      <div className="main-view">
+        <Navbar bg="light" variant="light">
+          <Container>
+            <Navbar.Brand href="#home">T-Flix App</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="#account">My list</Nav.Link>
+            <NavDropdown title="Movies" id="collasible-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Genre</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">
+                Director
+              </NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Release year</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+          </Container>
+        </Navbar>
+        <Row className="justify-content-md-center">
+          {selectedMovie
+            ? (
+              <Col md={8}>
+                <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
+              </Col>
+            )
+            : movies.map(movie => (
+              <Col md={3}>
+                <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }}/>
+              </Col>
+            ))
+          }
+        </Row>
+      </div>
   );
   }
 }
