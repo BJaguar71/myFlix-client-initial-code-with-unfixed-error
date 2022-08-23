@@ -1,15 +1,33 @@
 
 
+.app-container {
+  width: auto;
+  background: #fff;
+}
 
 
 
+.movie-card {
+  color: #68cefa6e;
+}
+
+.movie-button {
+  color: #f5a9b86e;
+}
 
 
 
+.app-container {
+  width: auto;
+  background: #fff;
+}
 
-
-.my-flix {
-  color: #4682b4;
+.page-header {
+  height: 100px;
+  width: 100%;
+  flex-direction: row;
+  display: flex;
+  position: fixed;
 }
 
 /*# sourceMappingURL=index.2b25e0b4.css.map */
