@@ -6,6 +6,7 @@ is a SPA movie application build with React that have multiple views and it allo
 - ReactDOM
 - Axios
 - Prpo-Types
+- React Bootstrap
 - MyFlix [API] ()
 
 #### Autor
