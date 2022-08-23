@@ -1,5 +1,22 @@
-$color: steelblue;
+/*
+collor palette
+movie-card-ground: #68cefa6e; 
+app-background: white;
+button-background: #f5a9b86e; 
+*/
+$app-background: white;
+$button: #f5a9b86e; 
+$movie-card-background: #68cefa6e;
 
-.my-flix {
-  color: $color;
+.app-container {
+  background: $app-background;
+  width: auto;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  position: fixed;
+  width:100%;
 }
