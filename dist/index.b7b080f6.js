@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"ltI4e":[function(require,module,exports) {
+})({"1xC6H":[function(require,module,exports) {
 var Refresh = require("react-refresh/runtime");
 var ErrorOverlay = require("react-error-overlay");
 Refresh.injectIntoGlobalHook(window);
@@ -163,11 +163,11 @@ window.addEventListener("parcelhmraccept", ()=>{
     ErrorOverlay.dismissRuntimeErrors();
 });
 
-},{"react-refresh/runtime":"7C3Pr","react-error-overlay":"bP4jm"}],"7C3Pr":[function(require,module,exports) {
+},{"react-refresh/runtime":"786KC","react-error-overlay":"1dldy"}],"786KC":[function(require,module,exports) {
 "use strict";
 module.exports = require("./cjs/react-refresh-runtime.development.js");
 
-},{"./cjs/react-refresh-runtime.development.js":"jB6pA"}],"jB6pA":[function(require,module,exports) {
+},{"./cjs/react-refresh-runtime.development.js":"hdge7"}],"hdge7":[function(require,module,exports) {
 /** @license React v0.9.0
  * react-refresh-runtime.development.js
  *
@@ -627,7 +627,7 @@ module.exports = require("./cjs/react-refresh-runtime.development.js");
     exports.setSignature = setSignature;
 })();
 
-},{}],"bP4jm":[function(require,module,exports) {
+},{}],"1dldy":[function(require,module,exports) {
 var process = require("process");
 !function(e, t) {
     module.exports = t();
@@ -2358,10 +2358,10 @@ var process = require("process");
     ]);
 });
 
-},{"process":"hzuU4"}],"hzuU4":[function(require,module,exports) {
+},{"process":"jhUEF"}],"jhUEF":[function(require,module,exports) {
 "use strict";
 
-},{}],"bW9yx":[function(require,module,exports) {
+},{}],"2RJSy":[function(require,module,exports) {
 "use strict";
 var global = arguments[3];
 var HMR_HOST = null;
@@ -2787,7 +2787,7 @@ const container = document.getElementsByClassName("app-container")[0];
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-dom":"j6uA9","./components/main-view/main-view":"4gflv","./index.scss":"lJZlQ","@parcel/transformer-js/src/esmodule-helpers.js":"2IFEV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"92zfT"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-dom":"j6uA9","./components/main-view/main-view":"4gflv","./index.scss":"lJZlQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iTorj":[function(require,module,exports) {
 "use strict";
 module.exports = require("./cjs/react-jsx-dev-runtime.development.js");
 
@@ -23671,7 +23671,7 @@ module.exports = require("./cjs/react-dom.development.js");
     exports.version = ReactVersion;
 })();
 
-},{"react":"21dqq","scheduler":"juvHo","object-assign":"7OXxh","scheduler/tracing":"9ZY7A"}],"juvHo":[function(require,module,exports) {
+},{"react":"21dqq","object-assign":"7OXxh","scheduler":"juvHo","scheduler/tracing":"9ZY7A"}],"juvHo":[function(require,module,exports) {
 "use strict";
 module.exports = require("./cjs/scheduler.development.js");
 
@@ -24532,7 +24532,7 @@ class MainView extends (0, _reactDefault.default).Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"2IFEV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"92zfT"}],"bwuIu":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../movie-card/movie-card":"bwuIu","../movie-view/movie-view":"ggaUx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"bwuIu":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$67b2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -24567,7 +24567,7 @@ class MovieCard extends (0, _reactDefault.default).Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"2IFEV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"92zfT"}],"2IFEV":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -24597,7 +24597,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"92zfT":[function(require,module,exports) {
+},{}],"km3Ru":[function(require,module,exports) {
 "use strict";
 var Refresh = require("react-refresh/runtime");
 function debounce(func, delay) {
@@ -24717,7 +24717,7 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"react-refresh/runtime":"7C3Pr"}],"ggaUx":[function(require,module,exports) {
+},{"react-refresh/runtime":"786KC"}],"ggaUx":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$e9f6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -24899,6 +24899,6 @@ class MovieView extends (0, _reactDefault.default).Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"2IFEV","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"92zfT"}],"lJZlQ":[function() {},{}]},["ltI4e","bW9yx","d8Dch"], "d8Dch", "parcelRequireaec4")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lJZlQ":[function() {},{}]},["1xC6H","2RJSy","d8Dch"], "d8Dch", "parcelRequireaec4")
 
 //# sourceMappingURL=index.b7b080f6.js.map
