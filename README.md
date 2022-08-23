@@ -4,6 +4,8 @@ is a SPA movie application build with React that have multiple views and it allo
 ## App dependencies: 
 - React
 - ReactDOM
+- Axios
+- Prpo-Types
 - MyFlix [API] ()
 
 #### Autor
