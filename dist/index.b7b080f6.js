@@ -41302,7 +41302,7 @@ function LoginView(props) {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
-                contrilId: "formPassword",
+                controlId: "formPassword",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Label, {
                         children: "Password:"
