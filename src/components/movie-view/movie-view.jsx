@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button, Card, CardGroup, Container, Col, Row, Form } from 'react-bootstrap';
 
 import './movie-view.scss';
 
@@ -21,42 +22,64 @@ export class MovieView extends React.Component {
     const { movie, onBackClick } = this.props;
 
     return (
-      <div className="movie-view">
-        <div className="movie-poster">
-          <img src={movie.Image} />
-        </div>
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
-        <div className="movie-genre">
-          <span className="label">Genre:
-            <span className="value">{movie.Genre.Name}</span>
-            <span className="value">{movie.Genre.Description}</span>
-          </span>
-        </div>
-        <div className="movie-summary">
-          <span className="label">Summary: </span>
-          <span className="value">{movie.Summary}</span>
-        </div>
-        <div className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.Director.Name}
-          </span>
-          <span className="value">{movie.Director.Bio}
-          </span>
-          <img src={movie.Director.Image} />
-        </div>
-        <div className="movie-actor">
-          <span className="label">Actor: </span>
-          <span className="value">{movie.Actor}</span>
-        </div>
-        <div className="movie-year">
-          <span className="label">Releas: </span>
-          <span className="value">{movie.Year}</span>
-        </div>
-        <button onClick={() => { onBackClick(null); }}>Back</button>
-      </div>
+      <Container fluid className="movieViewContainer">
+        <Row>
+          <Col>
+            <img className="movie-poster" src={movie.Image} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="movie-title">
+              <span className="label">Title: </span>
+              <span className="value">{movie.Title}</span>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="movie-Summary">
+              <span className="label">Summary: </span>
+              <span className="value">{movie.Summary}</span>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="movie-releaseyear">
+              <span className="label">ReleaseYear: </span>
+              <span className="value">{movie.Year}</span>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="movie-director">
+              <span className="label">Director: </span>
+              <span className="value">{movie.Director.Name}</span>
+            </div>
+            <div>{' Bio: ' + movie.Director.Bio}</div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="movie-genre">
+              <span className="label">Genre: </span>
+              <span className="value">{movie.Genre.Name} </span>
+            </div>
+            <div>{' Description: ' + movie.Genre.Description}</div>
+            <Button
+              onClick={() => {
+                onBackClick(null);
+              }}
+            >
+              Back
+            </Button>
+            <Button className="ml-2 my-2">Add to Favorites</Button>
+            <Button className="ml-2">Remove from Favorites</Button>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
