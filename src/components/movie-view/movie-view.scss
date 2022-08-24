@@ -7,3 +7,14 @@ button-background: #f5a9b86e;
 $app-background: white;
 $button: #f5a9b86e; 
 $movie-card-background: #68cefa6e;
+
+img.movie-poster {
+  width: 432px;
+  height: 600px;
+}
+@media (min-width: 320px) and (max-width: 425px) {
+  div img.movie-poster { 
+    width: 216px;
+    height: 340px;
+  } 
+}
