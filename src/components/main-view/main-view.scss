@@ -7,3 +7,12 @@ button-background: #f5a9b86e;
 $app-background: white;
 $button: #f5a9b86e; 
 $movie-card-background: #68cefa6e;
+
+.page-header {
+  background-color: $button;
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  position: fixed;
+  width:100%;
+}
