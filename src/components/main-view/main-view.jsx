@@ -65,10 +65,17 @@ export class MainView extends React.Component {
     });
   }
 
-  /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
-  onLoggedIn(user){
+  /* When a user successfully logs in, this function will store the user's token in local storage to hepl user stay logged in */
+  onLoggedIn(authData){
+    console.log(authData);
     this.setState({
-      user
+      user: authData.user.Username
+    });
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
+  }
+
     });
   }
   // Rendering the visual representation of the component
