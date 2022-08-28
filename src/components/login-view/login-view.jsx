@@ -15,6 +15,10 @@ export function LoginView(props) {
   const [ password, setPassword ] = useState('');
   // returns an array of paired values, destructured above
 
+  // declared a useState hook 
+  const [ usernameErr, setUsernameErr ] = useState('');
+  const [ passwordErr, setPasswordErr ] = useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // send a request to the server for authentication
