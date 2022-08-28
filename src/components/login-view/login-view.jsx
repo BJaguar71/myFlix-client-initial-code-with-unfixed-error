@@ -35,6 +35,7 @@ export function LoginView(props) {
     return isReq;
   }
 
+  // preventing default event
   const handleSubmit = (e) => {
     e.preventDefault();
     const isReq = validate();
