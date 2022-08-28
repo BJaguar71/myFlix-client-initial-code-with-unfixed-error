@@ -38,7 +38,7 @@ export class MainView extends React.Component {
       user: null
     };
   }
-  // fetching list of movies from t-flix API using axios's get method
+  // updated the method to persist the login data 
   componentDidMount(){
     axios.get('https://t-flix.herokuapp.com/movies')
     .then(response => {
