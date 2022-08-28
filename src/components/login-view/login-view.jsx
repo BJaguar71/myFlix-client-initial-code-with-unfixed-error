@@ -37,18 +37,21 @@ export function LoginView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // send a request to the server for authentication
-    axios.post('https://t-flix.herokuapp.com/login', {
-      Username: username,
-      Password: password
-    })
-    .then(response => {
-      const data = response.data;
-      props.onLoggedIn(data);
-    })
-    .catch(e => {
-      console.log('no such user')
-    });
+    const isReq = validate();
+    if (isReq) {
+      // send a request to the server for authentication
+      axios.post('https://t-flix.herokuapp.com/login', {
+        Username: username,
+        Password: password,
+      })
+      .then((response) => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch((e) => {
+        console.log('no such user');
+      });
+    }
   };
 
   return(
