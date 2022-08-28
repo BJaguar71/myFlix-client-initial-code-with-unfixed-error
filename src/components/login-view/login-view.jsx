@@ -19,6 +19,22 @@ export function LoginView(props) {
   const [ usernameErr, setUsernameErr ] = useState('');
   const [ passwordErr, setPasswordErr ] = useState('');
 
+  // defined a function for validating user inputs
+  const validate = () => {
+    let isReq = true;
+    if(!username){
+      setUsernameErr('Username Required');
+      isReq = false;
+    }else if(username.length < 2){
+      setUsernameErr('Username must be 2 characters long');
+      isReq = false;
+    } else if(password.length < 6){
+      setPasswordErr('Password must be 6 characters long');
+      isReq = false;
+    }
+    return isReq;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // send a request to the server for authentication
