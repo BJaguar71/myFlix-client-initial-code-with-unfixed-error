@@ -120,6 +120,7 @@ export class MainView extends React.Component {
               <NavDropdown.Item href="#action/3.3">Release year</NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          <Button variant="danger" onClick={() => { this.onLoggedOut() }}>Logout</Button>
           </Container>
         </Navbar>
         <Row className="justify-content-md-center">
