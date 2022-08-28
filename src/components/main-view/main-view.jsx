@@ -40,15 +40,13 @@ export class MainView extends React.Component {
   }
   // updated the method to persist the login data 
   componentDidMount(){
-    axios.get('https://t-flix.herokuapp.com/movies')
-    .then(response => {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
       this.setState({
-        movies: response.data
+      user: localStorage.getItem('user')
       });
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      this.getMovies(accessToken);
+    }
   }
   // creating setSelectedMovie component
   /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
