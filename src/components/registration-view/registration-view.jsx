@@ -60,6 +60,29 @@ export function RegistrationView(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    //assigning variable isReq to validate function 
+    const isReq = validate();
+    if(isReq){
+      axios.post('https://t-flix.herokuapp.com/users', {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthdate: birthdate
+      })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+        alert('Registration successful, please login!');
+        window.open('/', '_self');
+      })
+      .catch(response => {
+        console.error(response);
+        alert('unable to register');
+      });
+    }
+    // /* Send a request to the server for authentication */
+    // /* then call props on registored user(username) */
+    // props.onRegistration(username);
   };
 
   return (
