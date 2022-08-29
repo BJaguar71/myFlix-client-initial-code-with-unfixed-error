@@ -87,28 +87,42 @@ export function RegistrationView(props) {
 
   return (
     <Form>
-      <Form.Group controlId="formUsername">
-        <Form.Label>Username: </Form.Label>
-        <Form.Control type="text" value={username}
+      <Row className="mb-3">
+        <Form.Group as={Col} controlId="formUsername">
+          <Form.Label>Username: </Form.Label>
+          <Form.Control type="text" value={username} placeholder="Username"
           onChange={(e) => setUsername(e.target.value)} />
-      </Form.Group>
-
-      <Form.Group controlId="formPassword">
-        <Form.Label>Password: </Form.Label>
-        <Form.Control type="password" value={[password]}
+          {/* code added here to display validation error */}
+          {values.usernameErr && <p>{values.usernameErr}</p>}
+        </Form.Group>
+      
+        <Form.Group as={Col} controlId="formPassword">
+          <Form.Label>Password: </Form.Label>
+          <Form.Control type="password" value={password} placeholder="Password"
           onChange={(e) => setPassword(e.target.value)} />
-      </Form.Group>
+          {/* code added here to display validation error */}
+          {values.passwordErr && <p>{values.passwordErr}</p>}
+        </Form.Group>
+      </Row>
 
-      <Form.Group controlId="formEmail">
-        <Form.Label>Email: </Form.Label>
-        <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      </Form.Group>
+      <Row className="mb-3">
+        <Form.Group as={Col} controlId="formEmail">
+          <Form.Label>Email: </Form.Label>
+          <Form.Control type="email" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+          {/* code added here to display validation error */}
+          {values.emailErr && <p>{values.emailErr}</p>}
+        </Form.Group>
+      </Row>
 
-      <Form.Group controlId="formBirthdate">
-        <Form.Label>Birthdate: </Form.Label>
-        <Form.Control type="date" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} />
-      </Form.Group>
-      <Button variant="primary" type="submit" onClick={handleSubmit}>Register</Button>
+      <Row className="md-3">
+        <Form.Group as={Col} controlId="formBirthdate">
+          <Form.Label>Birthdate: </Form.Label>
+          <Form.Control type="date" value={birthdate} placeholder="Birthdate" onChange={(e) => setBirthdate(e.target.value)} />
+        </Form.Group>
+      </Row>
+
+      <Button variant="primary" type="submit" as={Col} onClick={handleSubmit}>Register</Button>
+      <Button variant="link" type="submit" onClick={handleSubmit}>Forget password?</Button>
     </Form>
   );
 }
