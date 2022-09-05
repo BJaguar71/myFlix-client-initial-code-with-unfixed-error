@@ -123,8 +123,15 @@ export class MainView extends React.Component {
               <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} onBackClick={() => history.goBack()} />
             </Col>
           }} />
+          <Route path={`/users/${user}`} render={({match, history}) => {
+            if (!user) return <Redirect to='/' />
+            return <Col>
+              <ProfilView movies={movies} user={user} onBackClick={() => history.goBack()} />
+            </Col>
+          }} />
         </Row>
-      </div>
-  );
+        </Container>
+      </Router>
+    );
   }
 }
