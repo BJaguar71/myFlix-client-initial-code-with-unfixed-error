@@ -1,6 +1,7 @@
 // Importing React to create the component
 import React from 'react';
 import axios from 'axios';
+import { Row, Col, Container } from 'react-bootstrap';
 
 import Row from 'react-bootstrap/Row';
 
