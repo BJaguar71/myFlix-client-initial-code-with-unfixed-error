@@ -61,7 +61,7 @@ export function LoginView(props) {
         <Form.Label>Username:</Form.Label>
         <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
         {/* code added here to display validation error */}
-        {username && <p>{usernameErr}</p>}
+        {usernameErr && <p>{usernameErr}</p>}
       </Form.Group>
 
       <Form.Group controlId="formPassword">
