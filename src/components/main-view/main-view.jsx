@@ -6,7 +6,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 import './main-view.scss';
-
+import { Navbar } from '../navbar/navbar';
 // importing RegistrationView
 import { RegistrationView } from '../registration-view/registration-view';
 
