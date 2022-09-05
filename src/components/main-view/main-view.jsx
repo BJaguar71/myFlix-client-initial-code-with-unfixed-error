@@ -50,15 +50,6 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-  // // logout function
-  // onLoggedOut() {
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('user');
-  //   this.setState({
-  //     user: null
-  //   });
-  // }
-
   // adding a new GetMovie method in order to be able to make authenticated requests to the API and see the list of movies
   getMovies(token) {
     axios.get('https://t-flix.herokuapp.com/movies', {
