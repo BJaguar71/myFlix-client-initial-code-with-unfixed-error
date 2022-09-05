@@ -12,3 +12,15 @@ const onLoggedOut = () => {
   localStorage.clear();
   window.open('/', '_self');
 }
+// defined a method that returns a token from local storage
+  const isAuth = () => {
+    if(typeof window == 'undefined') {
+      return false;
+    }
+    if (localStorage.getItem('token')) {
+      return localStorage.getItem('token');
+    } else {
+      return false;
+    }
+  };
+
