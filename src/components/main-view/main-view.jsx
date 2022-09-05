@@ -37,20 +37,6 @@ export class MainView extends React.Component {
       this.getMovies(accessToken);
     }
   }
-  // creating setSelectedMovie component
-  /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
-  setSelectedMovie(movie) {
-    this.setState({
-      selectedMovie: movie
-    });
-  }
-
-  // when a user successfully registers
-  onRegistration(register) {
-    this.setState({
-      register,
-    });
-  }
 
   /* When a user successfully logs in, this function will store the user's token in local storage to hepl user stay logged in */
   onLoggedIn(authData){
