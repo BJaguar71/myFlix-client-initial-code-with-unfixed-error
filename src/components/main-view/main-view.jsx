@@ -106,6 +106,11 @@ export class MainView extends React.Component {
               <RegistrationView />
             </Col>
           }} />
+          <Route exact path="/movies/:id" render={({ match, history }) => {
+            return <Col md={8}>
+              <MovieView movie={movies.find(m => m._id === match.params.movieId)}  onBackClick={() => history.goBack()} />
+            </Col>
+          }} />
         </Row>
       </div>
   );
