@@ -72,7 +72,7 @@ export class MovieView extends React.Component {
             <div>{` Description: ${movie.Genre.Description}`}</div>
             <Button
               onClick={() => {
-                onBackClick(null);
+                onBackClick();
               }}
             >
               Back
