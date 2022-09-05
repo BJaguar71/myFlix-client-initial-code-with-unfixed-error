@@ -98,7 +98,14 @@ export class MainView extends React.Component {
                 <MovieCard movie={m} />
               </Col>
             ))
-          }
+          }} />
+          {/* creatinhg route for navbar view */}
+          <Route path='/register' render={() => {
+            if (user) return <Redirect to='/' />
+            return <Col lg={8} md={8}>
+              <RegistrationView />
+            </Col>
+          }} />
         </Row>
       </div>
   );
