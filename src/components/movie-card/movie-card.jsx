@@ -22,9 +22,9 @@ export class MovieCard extends React.Component {
                   <Card.Text className="text-truncate">
                     {movie.Summary}
                   </Card.Text>
-                  <Button onClick={() => onMovieClick(movie)} variant="link">
-                    Open
-                  </Button>
+                  <Link to={`/movies/${movie._id}`}>
+                    <Button variant="link">Open</Button>
+                  </Link>
                 </Card.Body>
               </Card>
             </CardGroup>
