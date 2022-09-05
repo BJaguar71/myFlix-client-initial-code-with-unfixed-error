@@ -24,3 +24,45 @@ const onLoggedOut = () => {
     }
   };
 
+  return (
+    <Navbar bg="light" expand="lg">
+      <Container fluid>
+        <Navbar.Brand href="/">TFlix Movie App</Navbar.Brand>
+        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Collapse id="navbarScroll">
+          <Nav className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: '100px' }}
+            navbarScroll>
+            <Nav.Link href="/">Home</Nav.Link>
+            {/* if user logs in user part will be shown in navbar */}
+            {isAuth() && (
+              <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>
+            )}
+            <NavDropdown title="Movies" id="navbarScrollingDropdown">
+              <NavDropdown.Item href={`/movies/:Genre`}>Genre</NavDropdown.Item>
+              <NavDropdown.Item href={`/movies/:Directors`}>
+                Directors
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+          <Form className="d-flex">
+            <Form.Control
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
+            />
+            <Button variant="outline-success">Search</Button>
+          </Form>
+          {/* hides login and sign up if the token exists */}
+          {isAuth() && (
+            <Button variant="danger" onClick={() => { onLoggedOut() }}>Logout</Button>
+          )}
+          {!isAuth() && (
+            <Button variant='outline-primary' href='/register' type="submit">Sign-up</Button>
+          )}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+}
