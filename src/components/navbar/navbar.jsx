@@ -7,3 +7,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export function Navbar({user}) {
+//Sign out method
+const onLoggedOut = () => {
+  localStorage.clear();
+  window.open('/', '_self');
+}
