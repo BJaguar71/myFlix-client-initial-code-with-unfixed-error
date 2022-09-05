@@ -28,7 +28,7 @@ const onLoggedOut = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="/">TFlix Movie App</Navbar.Brand>
+        <Navbar.Brand href="/">T-Flix Movie App</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto my-2 my-lg-0"
@@ -37,11 +37,11 @@ const onLoggedOut = () => {
             <Nav.Link href="/">Home</Nav.Link>
             {/* if user logs in user part will be shown in navbar */}
             {isAuth() && (
-              <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>
+              <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>
             )}
             <NavDropdown title="Movies" id="navbarScrollingDropdown">
-              <NavDropdown.Item href={`/movies/:Genre`}>Genre</NavDropdown.Item>
-              <NavDropdown.Item href={`/movies/:Directors`}>
+              <NavDropdown.Item href={`/genres`}>Genre</NavDropdown.Item>
+              <NavDropdown.Item href={`/directors`}>
                 Directors
               </NavDropdown.Item>
             </NavDropdown>
