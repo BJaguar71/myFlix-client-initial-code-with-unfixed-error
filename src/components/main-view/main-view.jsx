@@ -73,6 +73,8 @@ export class MainView extends React.Component {
       <Router>
       {/* placed Navabr */}
         <Navbar users={user} />
+{/* Username will appear on main view after successful login */}
+        <Link to={`/users/${user}`}>{user}</Link>
         <Container>
         <Row className="main-view justify-content-md-center">
           {/* Routing starts from here */}
