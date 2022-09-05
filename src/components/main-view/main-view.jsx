@@ -1,7 +1,5 @@
 // Importing React to create the component
-import React from  'react';
-
-// Importing axios
+import React from 'react';
 import axios from 'axios';
 
 import Row from 'react-bootstrap/Row';
