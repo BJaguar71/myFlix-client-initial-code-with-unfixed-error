@@ -85,6 +85,13 @@ export function RegistrationView(props) {
     // props.onRegistration(username);
   };
 
+  //defined a click handler method then users can make post request to the user endpoint
+  const handleRegistration = (e) => {
+    e.preventDefault();
+    axios.post('https://t-flix.herokuapp.com/users', {
+      
+    })
+  }
   return (
     <Form>
       <Row className="mb-3">
