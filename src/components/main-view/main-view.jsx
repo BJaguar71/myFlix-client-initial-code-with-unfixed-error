@@ -15,6 +15,9 @@ import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 // importing MovieView component
 import { MovieView } from '../movie-view/movie-view';
+import { DirectorView } from '../director-view/director-view';
+import { ProfileView } from '../profile-view/profile-view';
+
 
 // Making and exposing the MainView component in order to be usable in other files using the React.Component template
 export class MainView extends React.Component {
