@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom';
 
 import './main-view.scss';
-import { Navbar } from '../navbar/navbar';
+import { Menubar } from '../menubar/menubar';
 // importing RegistrationView
 import { RegistrationView } from '../registration-view/registration-view';
 // importing LoginView component
