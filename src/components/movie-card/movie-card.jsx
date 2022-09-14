@@ -56,5 +56,5 @@ MovieCard.propTypes = {
     Year: PropTypes.number.isRequired,
     Featured: PropTypes.bool
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  onMovieClick: PropTypes.func
 };
