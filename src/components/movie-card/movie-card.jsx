@@ -23,7 +23,9 @@ export class MovieCard extends React.Component {
                     {movie.Summary}
                   </Card.Text>
                   <Link to={`/movies/${movie._id}`}>
-                    <Button variant="link">Open</Button>
+                    <Button variant='outline-warning'>
+                      Open
+                    </Button>
                   </Link>
                 </Card.Body>
               </Card>
