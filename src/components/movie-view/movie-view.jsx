@@ -59,7 +59,7 @@ export class MovieView extends React.Component {
                 <Button variant="link">Director</Button>
               </Link>
             </div>
-            <div>{` Bio: ${movie.Director.Bio}`}</div>
+            <div>{`Bio: ${movie.Director.Bio}`}</div>
           </Col>
         </Row>
         <Row>
