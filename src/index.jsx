@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import Container from 'react-bootstrap/Container';
 
@@ -13,7 +12,7 @@ import './index.scss';
 class MyFlixApplication extends React.Component {
   render() {
     return (
-      <Container className="my-flix">
+      <Container className="app-container">
         <MainView />
       </Container>
     );
