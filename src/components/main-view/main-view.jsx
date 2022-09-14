@@ -3,7 +3,11 @@ import React from 'react';
 import axios from 'axios';
 import { Row, Col, Container } from 'react-bootstrap';
 
-import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect
+} from 'react-router-dom';
 
 import './main-view.scss';
 import { Navbar } from '../navbar/navbar';
