@@ -83,9 +83,19 @@ export function RegistrationView(props) {
   const handleRegistration = (e) => {
     e.preventDefault();
     axios.post('https://t-flix.herokuapp.com/users', {
-      
-    })
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthdate: birthdate      
+    }).then(response => {
+      const data = response.data;
+      console.log(data);
+      window.open('/', '_self');
+    }).catch(e => {
+      console.log('error registrating the user')
+    });
   }
+  
   return (
     <Form>
       <Row className="mb-3">
