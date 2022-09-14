@@ -97,44 +97,75 @@ export function RegistrationView(props) {
   }
   
   return (
-    <Form>
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formUsername">
-          <Form.Label>Username: </Form.Label>
-          <Form.Control type="text" value={username} placeholder="Username"
-          onChange={(e) => setUsername(e.target.value)} />
-          {/* code added here to display validation error */}
-          {values.usernameErr && <p>{values.usernameErr}</p>}
-        </Form.Group>
-      
-        <Form.Group as={Col} controlId="formPassword">
-          <Form.Label>Password: </Form.Label>
-          <Form.Control type="password" value={password} placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)} />
-          {/* code added here to display validation error */}
-          {values.passwordErr && <p>{values.passwordErr}</p>}
-        </Form.Group>
-      </Row>
+    <Container>
+      <Row className='mt-5'>
+        <Form>
+          <h3>Sign Up</h3>
+          <p></p>
+          <Form.Group as={Col} controlId='formUsername'>
+            <Form.Label>Username: </Form.Label>
+            <Form.Control
+              type='text'
+              value={username}
+              placeholder='Username'
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            {/* code added here to display validation error  */}
+            {values.usernameErr && <p>{values.usernameErr}</p>}
+          </Form.Group>
 
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formEmail">
-          <Form.Label>Email: </Form.Label>
-          <Form.Control type="email" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-          {/* code added here to display validation error */}
-          {values.emailErr && <p>{values.emailErr}</p>}
-        </Form.Group>
-      </Row>
+          <Form.Group as={Col} controlId='formPassword'>
+            <Form.Label>Password: </Form.Label>
+            <Form.Control
+              type='password'
+              value={password}
+              placeholder='Password'
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {/* code added here to display validation error */}
+            {values.passwordErr && <p>{values.passwordErr}</p>}
+          </Form.Group>
+          <Form.Group as={Col} controlId='formEmail'>
+            <Form.Label>Email: </Form.Label>
+            <Form.Control
+              type='email'
+              value={email}
+              placeholder='Email'
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {/* code added here to display validation error */}
+            {values.emailErr && <p>{values.emailErr}</p>}
+          </Form.Group>
 
-      <Row className="md-3">
-        <Form.Group as={Col} controlId="formBirthdate">
-          <Form.Label>Birthdate: </Form.Label>
-          <Form.Control type="date" value={birthdate} placeholder="Birthdate" onChange={(e) => setBirthdate(e.target.value)} />
-        </Form.Group>
-      </Row>
+          <Form.Group as={Col} controlId='updateBirthdate'>
+            <Form.Label>Birthdate: </Form.Label>
+            <Form.Control
+              type='date'
+              value={birthdate}
+              placeholder='Birthdate'
+              onChange={(e) => setBirthdate(e.target.value)}
+            />
+          </Form.Group>
 
-      <Button variant="primary" type="submit" as={Col} onClick={handleSubmit}>Register</Button>
-      <Button variant="link" type="submit" onClick={handleSubmit}>Forget password?</Button>
-    </Form>
+          <Button
+            variant='primary'
+            type='submit'
+            as={Col}
+            onClick={handleSubmit}
+          >
+            Register
+          </Button>
+          <p></p>
+          <p>Already registered
+            <Link to={'/'}>Sign In</Link>
+            here
+          </p>
+          <Button variant="link" type="submit" onClick={handleSubmit}>
+            Forget password?
+          </Button>
+        </Form>
+      </Row>
+    </Container>
   );
 }
 
