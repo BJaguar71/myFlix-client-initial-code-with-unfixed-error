@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //imported react bootstrap component
 import { Button, Card, CardGroup, Container, Col, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import './movie-card.scss';
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onMovieClick } = this.props;
+    const { movie } = this.props;
 
     return (
       <Container fluid className="movieCardContainer">
@@ -18,12 +19,14 @@ export class MovieCard extends React.Component {
                 <Card.Img variant="top" src={movie.Image} />
                 <Card.Body>
                   <Card.Title>{movie.Title}</Card.Title>
-                  <Card.Text>
-                    <span>{movie.Director.Name}</span>
+                  <Card.Text className="text-truncate">
+                    {movie.Summary}
                   </Card.Text>
-                  <Button onClick={() => onMovieClick(movie)} variant="link">
-                    Open
-                  </Button>
+                  <Link to={`/movies/${movie._id}`}>
+                    <Button variant='outline-warning'>
+                      Open
+                    </Button>
+                  </Link>
                 </Card.Body>
               </Card>
             </CardGroup>
@@ -53,5 +56,5 @@ MovieCard.propTypes = {
     Year: PropTypes.number.isRequired,
     Featured: PropTypes.bool
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  onMovieClick: PropTypes.func
 };
