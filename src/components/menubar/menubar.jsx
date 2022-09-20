@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Form, Nav, Navbar, Button, NavDropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 export function Menubar({ user }) {
@@ -37,7 +38,7 @@ export function Menubar({ user }) {
               <NavDropdown.Item href={`/directors`}>Directors</NavDropdown.Item>
             </NavDropdown>
             {/* if user logs in user part will be shown in Menubar and will hide sign-up */}
-            {isAuth() && <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>}
+            {isAuth() && <Link to={`/users/${user}`}>{user}</Link>}
             {isAuth() && (
               <Button
                 variant="outline-danger"
