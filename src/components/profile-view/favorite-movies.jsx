@@ -9,7 +9,7 @@ import './profile-view.scss';
 export function FavoriteMovies(props) {
   const { movies, FavoriteMovies, currentUser, token } = props;
   const favoriteMoviesId = FavoriteMovies.map((m) => m._id);
-  const favoriteMovieList = movies.filter((m) => {
+  const favoriteMovieList = movies.map((m) => {
     return favoriteMoviesId.includes(m._id);
   });
 

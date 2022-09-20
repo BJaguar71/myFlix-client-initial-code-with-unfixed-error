@@ -57465,7 +57465,7 @@ function FavoriteMovies(props) {
   var favoriteMoviesId = FavoriteMovies.map(function (m) {
     return m._id;
   });
-  var favoriteMovieList = movies.filter(function (m) {
+  var favoriteMovieList = movies.map(function (m) {
     return favoriteMoviesId.includes(m._id);
   });
 
