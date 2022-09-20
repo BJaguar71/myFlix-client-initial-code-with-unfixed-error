@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Button } from 'react-bootstrap';
+import { Container, Row, Button, Col } from 'react-bootstrap';
 import { MovieCard } from '../movie-card/movie-card';
 
 
 export function GenreView(props) {
-  const { genre, genreMovies, goBack } = this.props;
+  const { genre, genreMovies, goBack } = props;
 
   return (
     <Container>
