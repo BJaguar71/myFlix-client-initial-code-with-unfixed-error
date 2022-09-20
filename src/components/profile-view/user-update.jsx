@@ -1,76 +1,89 @@
-import axios from 'axios';
 import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+
+import './profile-view.scss';
 
 export function UserUpdate(props) {
   const { user } = props;
-  const [ username, setUsername ] = useState('');
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
-  const [ birthdate, setBirthdate ] = useState('');
-  const [ values, setValues ] = useState({
-  // declaring hook for each input
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [birthdate, setBirthdate] = useState('');
+  const [values, setValues] = useState({
+    // declaring hook for each input
     usernameErr: '',
     passwordErr: '',
     emailErr: '',
-    birthdateErr: ''
+    birthdateErr: '',
   });
-
 
   // validate user inouts
   const validate = () => {
     let isReq = true;
-    if(!username) {
-      setValues({...values, usernameErr: 'Username Required!'});
+    if (!username) {
+      setValues({ ...values, usernameErr: 'Username Required!' });
       isReq = false;
-    }else if (username.length < 2){
-      setValues({...values, usernameErr: 'Username must be 5 charachter long!'});
+    } else if (username.length < 2) {
+      setValues({
+        ...values,
+        usernameErr: 'Username must be 5 charachter long!',
+      });
       isReq = false;
     }
     if (!password) {
-      setValues({...values, passwordErr: 'Password Requires!'});
+      setValues({ ...values, passwordErr: 'Password Requires!' });
       isReq = false;
-    } else if (password.length <6 ) {
-      setValues({...values, passwordErr: 'Password must be at least 6 character long!'});
+    } else if (password.length < 6) {
+      setValues({
+        ...values,
+        passwordErr: 'Password must be at least 6 character long!',
+      });
       isReq = false;
     }
     if (!email) {
-      setValues({...values, emailErr: 'Email Required!'});
+      setValues({ ...values, emailErr: 'Email Required!' });
       isReq = false;
     } else if (email.indexOf('@') === -1) {
-      setValues({...values, emailErr: 'Email is invalid!'});
+      setValues({ ...values, emailErr: 'Email is invalid!' });
       isReq = false;
     } else if (email.indexOf('.') === -1) {
-      setValues({...values, emailErr: 'Email is invalid!'});
+      setValues({ ...values, emailErr: 'Email is invalid!' });
       isReq = false;
     }
-  }
+  };
 
   // handleSubmit
   const handleSubmit = (event) => {
     event.preventDefault();
     const isReq = validate();
-    if(isReq) {
+    if (isReq) {
       const token = localStorage.getItem('token');
       // axios patch method to update user
-      axios.patch(`https://t-flix.herokuapp.com/users/${user.Username}`, {
-        Username: username,
-        Password: password,
-        Email: email,
-        Birthdate: birthdate
-      },
-      {
-        headers : { Authorization: `Beare ${token}`}
-      })
-      .then(respone => {
-        console.log(respone.data);
-        alert('Profile was successfully updated!');
-        window.open('/users/:username', '_self');
-      })
-      .catch(error => {
-         console.log(error);
-        alert('Unable to update profile.');
-      });
+      axios
+        .put(
+          `https://t-flix.herokuapp.com/users/${user.Username}`,
+          {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthdate: birthdate,
+          },
+          {
+            headers: { Authorization: `Beare ${token}` },
+          }
+        )
+        .then((respone) => {
+          console.log(respone.data);
+          alert('Profile was successfully updated!');
+          window.open('/users/:username', '_self');
+        })
+        .catch((error) => {
+          console.log(error);
+          alert('Unable to update profile.');
+        });
     }
   };
 
@@ -114,5 +127,4 @@ export function UserUpdate(props) {
       </Form>
     </Container>
   );
- 
 }
