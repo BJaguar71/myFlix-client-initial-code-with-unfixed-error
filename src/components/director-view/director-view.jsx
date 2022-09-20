@@ -1,27 +1,29 @@
 import React from 'react';
-import {Button, Row, Container} from 'react-bootstrap';
+import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 
 import { MovieCard} from '../movie-card/movie-card';
 
 
 export function DirectorView(props) {
-  const { director, directorMovies, goBack } = this.props;
+  const { director, directedMovies, goBack } = props;
 
   return (
     <Container>
-      <Button variant='outline-dark' onClick={goBack}>Back</Button>
-      <image className='director-img' src={director.Image} />
-      <h1>{director.Name}</h1>
-      <h2>Bio: </h2>
-      <p>{director.Bio}</p>
-      <h2>Directed Movies:</h2>
-      <Row className='justify-content-center'>{directorMovies.map((movie) => (
-        <MovieCard key={movie._id} movie={movie}>
-          {movie.Title}
-        </MovieCard>
-      ))}
-      </Row>
+      <Button variant="outline-dark" onClick={goBack}>
+        Back
+      </Button>
+        <h1>{director.Name}</h1>
+        <img className="director-img" src={director.Image} />
+          <h2>Bio:</h2>
+          <p>{director.Bio}</p>
+          <h3>Directed Movies:</h3>
+          <Row className="justify-content-center">
+            {directedMovies.map((movie) => (
+              <MovieCard key={movie._id} movie={movie}>
+                {movie.Title}
+              </MovieCard>
+            ))}
+          </Row>
     </Container>
   );
 }
-
