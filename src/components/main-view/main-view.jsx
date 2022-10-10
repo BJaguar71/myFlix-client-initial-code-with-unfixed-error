@@ -3,11 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import { Row, Col, Container } from 'react-bootstrap';
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Redirect
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 import './main-view.scss';
 import { Menubar } from '../menubar/menubar';
@@ -168,9 +164,9 @@ export class MainView extends React.Component {
                           (m) => m.Director.Name === match.params.name
                         ).Director
                       }
-                      directedMovies={
-                        movies.filter((m) => m.Director.Name === match.params.name)
-                      }
+                      directedMovies={movies.filter(
+                        (m) => m.Director.Name === match.params.name
+                      )}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>
@@ -191,11 +187,12 @@ export class MainView extends React.Component {
                   <Col md={8}>
                     <GenreView
                       genre={
-                        movies.find((m) => m.Genre.Name === match.params.name).Genre
+                        movies.find((m) => m.Genre.Name === match.params.name)
+                          .Genre
                       }
-                      genreMovies={
-                        movies.filter((m) => m.Genre.Name === match.params.name)
-                      }
+                      genreMovies={movies.filter(
+                        (m) => m.Genre.Name === match.params.name
+                      )}
                       onBackClick={() => history.goBack()}
                     />
                   </Col>
@@ -203,27 +200,13 @@ export class MainView extends React.Component {
               }}
             />
             <Route
-              path={`/users/${user}`}
+              path={`/users/:username`}
               render={({ match, history }) => {
-                if (!user) return <Redirect to="/" />;
+                if (user != match.params.username) return <Redirect to="/" />;
                 return (
                   <Col>
                     <ProfileView
-                      movie={movies}
-                      user={user}
-                      onBackClick={() => history.goBack()}
-                    />
-                  </Col>
-                );
-              }}
-            />
-            <Route
-              path="/users/:username"
-              render={({ match, history }) => {
-                if (!user) return <Redirect to="/" />;
-                return (
-                  <Col>
-                    <UserUpdate
+                      movies={movies}
                       user={user}
                       onBackClick={() => history.goBack()}
                     />

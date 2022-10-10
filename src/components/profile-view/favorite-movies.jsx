@@ -7,10 +7,9 @@ import { Button, Card, Col } from 'react-bootstrap';
 import './profile-view.scss';
 
 export function FavoriteMovies(props) {
-  const { movies, FavoriteMovies, currentUser, token } = props;
-  const favoriteMoviesId = FavoriteMovies.map((m) => m._id);
+  const { movies, favoriteMovies, currentUser, token } = props;
   const favoriteMovieList = movies.filter((m) => {
-    return favoriteMoviesId.includes(m._id);
+    return favoriteMovies.includes(m._id);
   });
 
   const handleMovieDelete = (movieId) => {

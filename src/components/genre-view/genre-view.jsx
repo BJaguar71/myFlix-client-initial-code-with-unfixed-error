@@ -5,7 +5,7 @@ import { MovieCard } from '../movie-card/movie-card';
 
 
 export function GenreView(props) {
-  const { genre, genreMovies, goBack } = props;
+  const { genre, genreMovies, onBackClick: goBack } = props;
 
   return (
     <Container>
