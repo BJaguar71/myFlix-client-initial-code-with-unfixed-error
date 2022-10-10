@@ -1,22 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import PropTypes from 'prop-types';
-
-// Import React Bootstrap Components
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
-import { UserUpdate } from './user-update';
-import { FavoriteMovies } from './favorite-movies';
-
-// Import custom SCSS
-import './profile-view.scss';
-
 export function ProfileView(props) {
+  const { movies } = props;
   const [user, setUser] = useState(props.user);
-  const [movies, setMovies] = useState(props.movies);
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const currentUser = localStorage.getItem('user');
   const token = localStorage.getItem('token');
@@ -28,7 +12,7 @@ export function ProfileView(props) {
       })
       .then((response) => {
         setUser(response.data);
-        setFavoriteMovies(response.data.favoriteMovies);
+        setFavoriteMovies(response.data.FavoriteMovies);
       })
       .catch(function (error) {
         console.log(error);
