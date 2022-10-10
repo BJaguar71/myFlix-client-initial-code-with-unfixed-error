@@ -5,7 +5,7 @@ import { MovieCard} from '../movie-card/movie-card';
 
 
 export function DirectorView(props) {
-  const { director, directedMovies, goBack } = props;
+  const { director, directedMovies, onBackClick: goBack } = props;
 
   return (
     <Container>
