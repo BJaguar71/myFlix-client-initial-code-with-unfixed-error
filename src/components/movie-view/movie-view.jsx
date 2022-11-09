@@ -25,7 +25,7 @@ export class MovieView extends React.Component {
       <Container fluid className="movieViewContainer">
         <Row>
           <Col>
-            <img className="movie-poster" src={movie.Image} />
+            <img className="movie-poster" crossOrigin="anonymous" src={movie.Image} />
           </Col>
         </Row>
         <Row>
