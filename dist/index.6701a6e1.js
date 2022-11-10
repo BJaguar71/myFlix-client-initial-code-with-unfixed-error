@@ -22992,7 +22992,7 @@ class MainView extends _reactDefault.default.Component {
     }
     // adding a new GetMovie method in order to be able to make authenticated requests to the API and see the list of movies
     getMovies(token) {
-        _axiosDefault.default.get('https://t-flix.herokuapp.com/movies', {
+        _axiosDefault.default.get('https://t-flix.fly.dev/movies', {
             // passing the bearer authorization in the header of the http request to make authenticated request to te API
             headers: {
                 Authorization: `Bearer ${token}`
@@ -42164,40 +42164,29 @@ function Menubar({ user  }) {
                                     __self: this,
                                     children: "Home"
                                 }),
-                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.NavDropdown, {
-                                    title: "Movies",
-                                    id: "navbarScrollingDropdown",
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
+                                    href: "/genres",
                                     __source: {
                                         fileName: "src/components/menubar/menubar.jsx",
                                         lineNumber: 36
                                     },
                                     __self: this,
-                                    children: [
-                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.NavDropdown.Item, {
-                                            href: `/genres`,
-                                            __source: {
-                                                fileName: "src/components/menubar/menubar.jsx",
-                                                lineNumber: 37
-                                            },
-                                            __self: this,
-                                            children: "Genre"
-                                        }),
-                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.NavDropdown.Item, {
-                                            href: `/directors`,
-                                            __source: {
-                                                fileName: "src/components/menubar/menubar.jsx",
-                                                lineNumber: 38
-                                            },
-                                            __self: this,
-                                            children: "Directors"
-                                        })
-                                    ]
+                                    children: "Genre"
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Nav.Link, {
+                                    href: "/directors",
+                                    __source: {
+                                        fileName: "src/components/menubar/menubar.jsx",
+                                        lineNumber: 37
+                                    },
+                                    __self: this,
+                                    children: "Director"
                                 }),
                                 isAuth() && /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
                                     to: `/users/${user}`,
                                     __source: {
                                         fileName: "src/components/menubar/menubar.jsx",
-                                        lineNumber: 41
+                                        lineNumber: 39
                                     },
                                     __self: this,
                                     children: user
@@ -42209,7 +42198,7 @@ function Menubar({ user  }) {
                                     },
                                     __source: {
                                         fileName: "src/components/menubar/menubar.jsx",
-                                        lineNumber: 43
+                                        lineNumber: 41
                                     },
                                     __self: this,
                                     children: "Logout"
@@ -42220,7 +42209,7 @@ function Menubar({ user  }) {
                             className: "d-flex",
                             __source: {
                                 fileName: "src/components/menubar/menubar.jsx",
-                                lineNumber: 53
+                                lineNumber: 51
                             },
                             __self: this,
                             children: [
@@ -42231,7 +42220,7 @@ function Menubar({ user  }) {
                                     "aria-label": "Search",
                                     __source: {
                                         fileName: "src/components/menubar/menubar.jsx",
-                                        lineNumber: 54
+                                        lineNumber: 52
                                     },
                                     __self: this
                                 }),
@@ -42239,7 +42228,7 @@ function Menubar({ user  }) {
                                     variant: "outline-success",
                                     __source: {
                                         fileName: "src/components/menubar/menubar.jsx",
-                                        lineNumber: 60
+                                        lineNumber: 58
                                     },
                                     __self: this,
                                     children: "Search"
@@ -42252,7 +42241,7 @@ function Menubar({ user  }) {
                             type: "submit",
                             __source: {
                                 fileName: "src/components/menubar/menubar.jsx",
-                                lineNumber: 63
+                                lineNumber: 61
                             },
                             __self: this,
                             children: "Sign-up"
@@ -42480,7 +42469,7 @@ function RegistrationView(props) {
         e.preventDefault();
         //assigning variable isReq to validate function 
         const isReq = validate();
-        if (isReq) _axiosDefault.default.post('https://t-flix.herokuapp.com/users', {
+        if (isReq) _axiosDefault.default.post('https://t-flix.fly.dev/users', {
             Username: username,
             Password: password,
             Email: email,
@@ -42502,7 +42491,7 @@ function RegistrationView(props) {
     //defined a click handler method then users can make post request to the user endpoint
     const handleRegistration = (e)=>{
         e.preventDefault();
-        _axiosDefault.default.post('https://t-flix.herokuapp.com/users', {
+        _axiosDefault.default.post('https://t-flix.fly.dev/users', {
             Username: username,
             Password: password,
             Email: email,
@@ -42826,7 +42815,7 @@ function LoginView(props) {
         e.preventDefault();
         const isReq = validate();
         if (isReq) // send a request to the server for authentication
-        _axiosDefault.default.post('https://t-flix.herokuapp.com/login', {
+        _axiosDefault.default.post('https://t-flix.fly.dev/login', {
             Username: username,
             Password: password
         }).then((response)=>{
@@ -43577,7 +43566,7 @@ function ProfileView(props) {
     const currentUser = localStorage.getItem('user');
     const token = localStorage.getItem('token');
     const getUser = ()=>{
-        _axiosDefault.default.get(`https://t-flix.herokuapp.com/users/${currentUser}`, {
+        _axiosDefault.default.get(`https://t-flix.fly.dev/users/${currentUser}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -43592,7 +43581,7 @@ function ProfileView(props) {
         getUser();
     }, []);
     const handleDelete = ()=>{
-        _axiosDefault.default.delete(`https://t-flix.herokuapp.com/users/${currentUser}`, {
+        _axiosDefault.default.delete(`https://t-flix.fly.dev/users/${currentUser}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -43831,7 +43820,7 @@ function FavoriteMovies(props) {
         return favoriteMovies.includes(m._id);
     });
     const handleMovieDelete = (movieId)=>{
-        _axiosDefault.default.delete(`https://t-flix.herokuapp.com/users/${currentUser}/movies/${movieId}`, {
+        _axiosDefault.default.delete(`https://t-flix.fly.dev/users/${currentUser}/movies/${movieId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -44050,7 +44039,7 @@ function UserUpdate(props) {
         if (isReq) {
             const token = localStorage.getItem('token');
             // axios patch method to update user
-            _axiosDefault.default.put(`https://t-flix.herokuapp.com/users/${user.Username}`, {
+            _axiosDefault.default.put(`https://t-flix.fly.dev/users/${user.Username}`, {
                 Username: username,
                 Password: password,
                 Email: email,
