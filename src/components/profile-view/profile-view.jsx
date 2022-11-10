@@ -1,3 +1,10 @@
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { FavoriteMovies } from "./favorite-movies";
+import { UserUpdate } from "./user-update";
+
 export function ProfileView(props) {
   const { movies } = props;
   const [user, setUser] = useState(props.user);
