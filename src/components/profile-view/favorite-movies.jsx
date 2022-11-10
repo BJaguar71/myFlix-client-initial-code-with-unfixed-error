@@ -15,7 +15,7 @@ export function FavoriteMovies(props) {
   const handleMovieDelete = (movieId) => {
     axios
       .delete(
-        `https://t-flix.herokuapp.com/users/${currentUser}/movies/${movieId}`,
+        `https://t-flix.fly.dev/users/${currentUser}/movies/${movieId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

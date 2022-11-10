@@ -64,7 +64,7 @@ export function UserUpdate(props) {
       // axios patch method to update user
       axios
         .put(
-          `https://t-flix.herokuapp.com/users/${user.Username}`,
+          `https://t-flix.fly.dev/users/${user.Username}`,
           {
             Username: username,
             Password: password,

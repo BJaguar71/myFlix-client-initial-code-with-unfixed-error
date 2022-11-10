@@ -14,7 +14,7 @@ export function ProfileView(props) {
 
   const getUser = () => {
     axios
-      .get(`https://t-flix.herokuapp.com/users/${currentUser}`, {
+      .get(`https://t-flix.fly.dev/users/${currentUser}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -32,7 +32,7 @@ export function ProfileView(props) {
 
   const handleDelete = () => {
     axios
-      .delete(`https://t-flix.herokuapp.com/users/${currentUser}`, {
+      .delete(`https://t-flix.fly.dev/users/${currentUser}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
