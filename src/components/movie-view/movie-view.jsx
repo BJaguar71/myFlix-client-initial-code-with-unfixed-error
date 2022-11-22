@@ -18,6 +18,19 @@ export class MovieView extends React.Component {
     document.removeEventListener('keypress', this.keypressCallback);
   }
 
+  addMovie(movieId) {
+    const currentUser = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    axios
+      .post(`https://t-flix.fly.dev/users/${currentUser}/movies/${movieId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        alert('The movie was successfully added.');
+      })
+      .catch((err) => console.log(err));
+  }
+
   }
 
   render() {
