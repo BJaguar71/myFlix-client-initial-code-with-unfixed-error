@@ -39,6 +39,7 @@ export function Menubar({ user }) {
             {isAuth() && (
               <Button
                 variant="outline-danger"
+                className='btn btn-outline-danger'
                 onClick={() => {
                   onLoggedOut();
                 }}
