@@ -31,6 +31,18 @@ export class MovieView extends React.Component {
       .catch((err) => console.log(err));
   }
 
+  deleteMovie(movieId) {
+    const currentUser = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    axios
+      .delete(`https://t-flix.fly.dev/users/${currentUser}/movies/${movieId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        alert('The movie was successfully removed.');
+        window.open(`users/${currentUser}`, '_self');
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {
