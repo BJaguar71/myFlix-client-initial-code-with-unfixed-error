@@ -12,6 +12,13 @@ button-background: #f5a9b86e;
   position: fixed;
   width: 100%;
 }
+.btn-outline-danger {
+  margin-left: 20px;
+}
+
+a {
+  margin: 5px;
+}
 /*
 collor palette
 movie-card-ground: #68cefa6e; 
@@ -93,6 +100,7 @@ img.movie-poster {
     height: 340px;
   }
 }
+
 /*
 collor palette
 movie-card-ground: #68cefa6e; 
@@ -103,5 +111,4 @@ button-background: #f5a9b86e;
   background: white;
   width: auto;
 }
-
-/*# sourceMappingURL=/src.78399e21.css.map */
+/*# sourceMappingURL=index.17d663fa.css.map */

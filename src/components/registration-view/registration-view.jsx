@@ -56,7 +56,7 @@ export function RegistrationView(props) {
     //assigning variable isReq to validate function 
     const isReq = validate();
     if(isReq){
-      axios.post('https://t-flix.herokuapp.com/users', {
+      axios.post('https://t-flix.fly.dev/users', {
         Username: username,
         Password: password,
         Email: email,
@@ -82,7 +82,7 @@ export function RegistrationView(props) {
   //defined a click handler method then users can make post request to the user endpoint
   const handleRegistration = (e) => {
     e.preventDefault();
-    axios.post('https://t-flix.herokuapp.com/users', {
+    axios.post('https://t-flix.fly.dev/users', {
       Username: username,
       Password: password,
       Email: email,

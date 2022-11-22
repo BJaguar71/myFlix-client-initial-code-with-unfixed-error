@@ -12,21 +12,6 @@ export function FavoriteMovies(props) {
     return favoriteMovies.includes(m._id);
   });
 
-  const handleMovieDelete = (movieId) => {
-    axios
-      .delete(
-        `https://t-flix.herokuapp.com/users/${currentUser}/movies/${movieId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then(() => {
-        alert('The movie was successfully removed.');
-        window.open('/users/:username', '_self');
-      })
-      .catch((err) => console.log(err));
-  };
-
   return (
     <>
       {favoriteMovieList.length === 0 ? (
@@ -37,7 +22,7 @@ export function FavoriteMovies(props) {
             <Col xs={10} sm={8} md={6} lg={4}>
               <Card id="movie-card">
                 <Link to={`/movies/${movie._id}`}>
-                  <Card.Img variant="top" src={movie.Image} />
+                  <Card.Img variant="top" src={movie.Image} crossOrigin="anonymous" />
                 </Link>
                 <Card.Body>
                   <Card.Title>{movie.Title}</Card.Title>

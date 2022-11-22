@@ -1,3 +1,10 @@
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import { FavoriteMovies } from "./favorite-movies";
+import { UserUpdate } from "./user-update";
+
 export function ProfileView(props) {
   const { movies } = props;
   const [user, setUser] = useState(props.user);
@@ -7,7 +14,7 @@ export function ProfileView(props) {
 
   const getUser = () => {
     axios
-      .get(`https://t-flix.herokuapp.com/users/${currentUser}`, {
+      .get(`https://t-flix.fly.dev/users/${currentUser}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -25,7 +32,7 @@ export function ProfileView(props) {
 
   const handleDelete = () => {
     axios
-      .delete(`https://t-flix.herokuapp.com/users/${currentUser}`, {
+      .delete(`https://t-flix.fly.dev/users/${currentUser}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

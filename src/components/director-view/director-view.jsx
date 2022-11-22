@@ -13,7 +13,7 @@ export function DirectorView(props) {
         Back
       </Button>
         <h1>{director.Name}</h1>
-        <img className="director-img" src={director.Image} />
+        <img className="director-img" src={director.Image} crossOrigin="anonymous"/>
           <h2>Bio:</h2>
           <p>{director.Bio}</p>
           <h3>Directed Movies:</h3>

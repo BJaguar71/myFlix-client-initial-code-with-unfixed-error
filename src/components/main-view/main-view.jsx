@@ -58,7 +58,7 @@ export class MainView extends React.Component {
   // adding a new GetMovie method in order to be able to make authenticated requests to the API and see the list of movies
   getMovies(token) {
     axios
-      .get('https://t-flix.herokuapp.com/movies', {
+      .get('https://t-flix.fly.dev/movies', {
         // passing the bearer authorization in the header of the http request to make authenticated request to te API
         headers: { Authorization: `Bearer ${token}` },
       })

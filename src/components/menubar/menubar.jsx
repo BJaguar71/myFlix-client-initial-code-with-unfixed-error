@@ -1,6 +1,8 @@
 import React from 'react';
-import { Container, Form, Nav, Navbar, Button, NavDropdown } from 'react-bootstrap';
+import { Container, Form, Nav, Navbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+import './menubar.scss';
 
 
 export function Menubar({ user }) {
@@ -24,7 +26,7 @@ export function Menubar({ user }) {
   return (
     <Navbar bg="light" variant="light" expand="lg" sticky="top">
       <Container fluid>
-        <Navbar.Brand href="/">T-Flix Movie App</Navbar.Brand>
+        <Navbar.Brand href="/">T-Flix Movie </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -32,16 +34,12 @@ export function Menubar({ user }) {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="/">Home</Nav.Link>
-            <NavDropdown title="Movies" id="navbarScrollingDropdown">
-              <NavDropdown.Item href={`/genres`}>Genre</NavDropdown.Item>
-              <NavDropdown.Item href={`/directors`}>Directors</NavDropdown.Item>
-            </NavDropdown>
             {/* if user logs in user part will be shown in Menubar and will hide sign-up */}
             {isAuth() && <Link to={`/users/${user}`}>{user}</Link>}
             {isAuth() && (
               <Button
                 variant="outline-danger"
+                className='btn btn-outline-danger'
                 onClick={() => {
                   onLoggedOut();
                 }}
