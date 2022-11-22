@@ -2,6 +2,8 @@ import React from 'react';
 import { Container, Form, Nav, Navbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import './menubar.scss';
+
 
 export function Menubar({ user }) {
   //Sign out method
