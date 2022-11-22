@@ -126,18 +126,18 @@ MovieView.propTypes = {
     Title: PropTypes.string.isRequired,
     Genre: PropTypes.shape({
       Name: PropTypes.string.isRequired,
-      Description: PropTypes.string
+      Description: PropTypes.string,
     }),
     Summary: PropTypes.string.isRequired,
     Director: PropTypes.shape({
       Name: PropTypes.string.isRequired,
       Bio: PropTypes.string.isRequired,
-      Image: PropTypes.string.isRequired
+      Image: PropTypes.string.isRequired,
     }),
     Actors: PropTypes.array.isRequired,
     Image: PropTypes.string.isRequired,
     Year: PropTypes.number.isRequired,
-    Featured: PropTypes.bool
+    Featured: PropTypes.bool,
   }).isRequired,
-  onBackClick: PropTypes.func.isRequired
+  onBackClick: PropTypes.func.isRequired,
 };
