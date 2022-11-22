@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Button, Container, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './movie-view.scss';
+import axios from 'axios';
 
 export class MovieView extends React.Component {
-
   keypressCallback(event) {
     console.log(event.key);
   }
