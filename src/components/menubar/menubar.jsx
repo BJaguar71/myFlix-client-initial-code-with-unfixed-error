@@ -34,9 +34,6 @@ export function Menubar({ user }) {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/genres">Genre</Nav.Link>
-            <Nav.Link href="/directors">Director</Nav.Link>
             {/* if user logs in user part will be shown in Menubar and will hide sign-up */}
             {isAuth() && <Link to={`/users/${user}`}>{user}</Link>}
             {isAuth() && (
