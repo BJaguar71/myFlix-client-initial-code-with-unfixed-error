@@ -12,21 +12,6 @@ export function FavoriteMovies(props) {
     return favoriteMovies.includes(m._id);
   });
 
-  const handleMovieDelete = (movieId) => {
-    axios
-      .delete(
-        `https://t-flix.fly.dev/users/${currentUser}/movies/${movieId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then(() => {
-        alert('The movie was successfully removed.');
-        window.open('/users/:username', '_self');
-      })
-      .catch((err) => console.log(err));
-  };
-
   return (
     <>
       {favoriteMovieList.length === 0 ? (
