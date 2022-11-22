@@ -109,8 +109,11 @@ export class MovieView extends React.Component {
             >
               Back
             </Button>
-            <Button className="ml-2 my-2">Add to Favorites</Button>
-            <Button className="ml-2">Remove from Favorites</Button>
+            <Button
+            onClick={() => this.addMovie(movie._id)}
+            className="ml-2 my-2">Add to Favorites</Button>
+            <Button
+            onClick={() => this.deleteMovie(movie._id)} className="ml-2">Remove from Favorites</Button>
           </Col>
         </Row>
       </Container>
