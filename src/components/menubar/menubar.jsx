@@ -26,7 +26,7 @@ export function Menubar({ user }) {
   return (
     <Navbar bg="light" variant="light" expand="lg" sticky="top">
       <Container fluid>
-        <Navbar.Brand href="/">T-Flix Movie App</Navbar.Brand>
+        <Navbar.Brand href="/">T-Flix Movie </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
