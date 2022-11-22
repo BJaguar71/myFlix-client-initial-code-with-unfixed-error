@@ -12,6 +12,13 @@ button-background: #f5a9b86e;
   position: fixed;
   width: 100%;
 }
+.btn-outline-danger {
+  margin-left: 20px;
+}
+
+a {
+  margin: 5px;
+}
 /*
 collor palette
 movie-card-ground: #68cefa6e; 
