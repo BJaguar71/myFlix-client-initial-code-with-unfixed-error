@@ -36,7 +36,7 @@ export class MainView extends React.Component {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
-        user: localStorage.getItem('user'),
+        user: localStorage.getItem('UserID'),
       });
       // if the user is logged in then the getMovies method will be called (makes GET request to the movies endpoint)
       this.getMovies(accessToken);
@@ -47,11 +47,11 @@ export class MainView extends React.Component {
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
-      user: authData.user.Username,
+      user: authData.user.UserID,
     });
 
     localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
+    localStorage.setItem('UserID', authData.user.UserID);
     this.getMovies(authData.token);
   }
 

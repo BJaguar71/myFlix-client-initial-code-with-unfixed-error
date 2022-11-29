@@ -19,10 +19,10 @@ export class MovieView extends React.Component {
   }
 
   addMovie(movieId) {
-    const currentUser = localStorage.getItem('user');
+    const currentUser = localStorage.getItem('UserID');
     const token = localStorage.getItem('token');
     axios
-      .post(`https://t-flix.fly.dev/users/${currentUser}/movies/${movieId}`, {
+      .post(`https:/t-flix.fly.dev/users/${currentUser}/movies/${movieId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -32,10 +32,10 @@ export class MovieView extends React.Component {
   }
 
   deleteMovie(movieId) {
-    const currentUser = localStorage.getItem('user');
+    const currentUser = localStorage.getItem('UserID');
     const token = localStorage.getItem('token');
     axios
-      .delete(`https://t-flix.fly.dev/users/${currentUser}/movies/${movieId}`, {
+      .delete(`https:/t-flix.fly.dev/users/${currentUser}/movies/${movieId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -113,7 +113,7 @@ export class MovieView extends React.Component {
             onClick={() => this.addMovie(movie._id)}
             className="ml-2 my-2">Add to Favorites</Button>
             <Button
-            onClick={() => this.deleteMovie(movie._id)} className="ml-2">Remove from Favorites</Button>
+            onClick={() => this.deleteMovie(movie._id)} className="ml-2 my-2">Remove from Favorites</Button>
           </Col>
         </Row>
       </Container>
