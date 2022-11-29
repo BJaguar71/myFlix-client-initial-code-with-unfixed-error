@@ -83,7 +83,7 @@ export class MainView extends React.Component {
         {/* Username will appear on main view after successful login
         <Link to={`/users/${user}`}>{user}</Link> */}
         <Container>
-          <Row className="main-view justify-content-md-center">
+          <Row className="main-view justify-content-md-center mt-3">
             {/* Routing starts from here */}
             <Route
               exact
@@ -92,13 +92,11 @@ export class MainView extends React.Component {
                 /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
                 if (!user)
                   return (
-                    <Row>
                       <Col>
                         <LoginView
                           onLoggedIn={(user) => this.onLoggedIn(user)}
                         />
                       </Col>
-                    </Row>
                   );
                 // before the movies have been loaded
                 if (movies.length === 0) return <div className="main-view" />;
@@ -116,7 +114,7 @@ export class MainView extends React.Component {
               render={() => {
                 if (user) return <Redirect to="/" />;
                 return (
-                  <Col lg={8} md={8}>
+                  <Col>
                     <RegistrationView />
                   </Col>
                 );
@@ -130,7 +128,7 @@ export class MainView extends React.Component {
                 }
                 if (!user)
                   return (
-                    <Col md={8}>
+                    <Col>
                       <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                       ;
                     </Col>
