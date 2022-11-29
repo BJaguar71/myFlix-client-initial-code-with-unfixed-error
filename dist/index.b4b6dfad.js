@@ -41337,8 +41337,8 @@ function VisibilityFilterInput(props) {
         placeholder: "filter"
     }, void 0, false, {
         fileName: "src/components/visibility-filter-input/visibility-filter-input.jsx",
-        lineNumber: 9,
-        columnNumber: 10
+        lineNumber: 10,
+        columnNumber: 5
     }, this);
 }
 _c = VisibilityFilterInput;

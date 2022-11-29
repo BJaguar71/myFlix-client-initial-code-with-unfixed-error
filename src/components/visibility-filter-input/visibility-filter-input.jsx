@@ -6,14 +6,13 @@ import Form from 'react-bootstrap/Form';
 import { filterMovies } from '../../actions/actions';
 
 function VisibilityFilterInput(props) {
-  return <Form.Control
-    onChange={e => props.setFilter(e.target.value)}
-    value={props.VisibilityFilter}
-    placeholder='filter'
-    />;
+  return (
+    <Form.Control
+      onChange={(e) => props.setFilter(e.target.value)}
+      value={props.VisibilityFilter}
+      placeholder="filter"
+    />
+  );
 }
 
-export default connect(
-  null,
-  {setFilter}
-)(VisibilityFilterInput);
+export default connect(null, { setFilter })(VisibilityFilterInput);
