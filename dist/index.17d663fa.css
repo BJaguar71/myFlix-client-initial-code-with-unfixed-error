@@ -37,6 +37,23 @@ movie-card-ground: #68cefa6e;
 app-background: white;
 button-background: #f5a9b86e; 
 */
+img.movie-poster {
+  width: 432px;
+  height: 600px;
+}
+
+@media (min-width: 320px) and (max-width: 425px) {
+  div img.movie-poster {
+    width: 216px;
+    height: 340px;
+  }
+}
+/*
+collor palette
+movie-card-ground: #68cefa6e; 
+app-background: white;
+button-background: #f5a9b86e; 
+*/
 .movie-button {
   color: rgba(245, 169, 184, 0.431372549);
 }
@@ -81,23 +98,6 @@ button.movie-button.btn.btn-link {
   }
   .card {
     margin: 4px;
-  }
-}
-/*
-collor palette
-movie-card-ground: #68cefa6e; 
-app-background: white;
-button-background: #f5a9b86e; 
-*/
-img.movie-poster {
-  width: 432px;
-  height: 600px;
-}
-
-@media (min-width: 320px) and (max-width: 425px) {
-  div img.movie-poster {
-    width: 216px;
-    height: 340px;
   }
 }
 
