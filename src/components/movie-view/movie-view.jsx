@@ -17,33 +17,6 @@ export class MovieView extends React.Component {
     document.removeEventListener('keypress', this.keypressCallback);
   }
 
-  addMovie(movieId) {
-    const currentUser = localStorage.getItem('UserID');
-    const token = localStorage.getItem('token');
-    axios
-      .post(`https:/t-flix.fly.dev/users/${currentUser}/movies/${movieId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        alert('The movie was successfully added.');
-      })
-      .catch((err) => console.log(err));
-  }
-
-  deleteMovie(movieId) {
-    const currentUser = localStorage.getItem('UserID');
-    const token = localStorage.getItem('token');
-    axios
-      .delete(`https:/t-flix.fly.dev/users/${currentUser}/movies/${movieId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        alert('The movie was successfully removed.');
-        window.open(`users/${currentUser}`, '_self');
-      })
-      .catch((err) => console.log(err));
-  }
-
   render() {
     const { movie, onBackClick, deleteMovie, addMovie } =
       this.props;
