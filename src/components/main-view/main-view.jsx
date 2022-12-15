@@ -36,7 +36,7 @@ export class MainView extends React.Component {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
-        user: localStorage.getItem('UserID'),
+        user: JSON.parse(localStorage.getItem('User')),
       });
       // if the user is logged in then the getMovies method will be called (makes GET request to the movies endpoint)
       this.getMovies(accessToken);
@@ -79,7 +79,7 @@ export class MainView extends React.Component {
     return (
       <Router>
         {/* placed Menubar */}
-        <Menubar user={user} />
+        <Menubar user={user && user.name} />
         {/* Username will appear on main view after successful login
         <Link to={`/users/${user}`}>{user}</Link> */}
         <Container>
