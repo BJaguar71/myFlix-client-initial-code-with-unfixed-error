@@ -18,8 +18,7 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, onBackClick, deleteMovie, addMovie } =
-      this.props;
+    const { movie, onBackClick, deleteMovie, addMovie, user } = this.props;
 
     return (
       <Container fluid className="movieViewContainer">
