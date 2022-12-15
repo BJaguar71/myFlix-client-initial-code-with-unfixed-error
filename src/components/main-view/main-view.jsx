@@ -55,7 +55,7 @@ export class MainView extends React.Component {
     });
 
     localStorage.setItem('token', authData.token);
-    localStorage.setItem('UserID', authData.user.UserID);
+    localStorage.setItem('User', JSON.stringify(userObj));
     this.getMovies(authData.token);
   }
 
