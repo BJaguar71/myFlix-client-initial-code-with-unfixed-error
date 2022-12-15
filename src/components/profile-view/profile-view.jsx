@@ -32,7 +32,7 @@ export function ProfileView(props) {
 
   const handleDelete = () => {
     axios
-      .delete(`https://t-flix.fly.dev/users/${currentUser}`, {
+      .delete(`https://t-flix.fly.dev/users/${user.name}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -73,7 +73,7 @@ export function ProfileView(props) {
         <FavoriteMovies
           movies={movies}
           favoriteMovies={favoriteMovies}
-          currentUser={currentUser}
+          currentUser={user.name}
           token={token}
         />
       </Row>
