@@ -45,7 +45,11 @@ export class MainView extends React.Component {
 
   /* When a user successfully logs in, this function will store the user's token in local storage to hepl user stay logged in */
   onLoggedIn(authData) {
-    console.log(authData);
+    const userObj = {
+      name: authData.user.Username,
+      userID: authData.user._id,
+      favoriteMovies: authData.user.FavoriteMovies,
+    };
     this.setState({
       user: authData.user.UserID,
     });
