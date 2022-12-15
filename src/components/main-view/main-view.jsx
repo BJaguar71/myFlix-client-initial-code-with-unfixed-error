@@ -51,7 +51,7 @@ export class MainView extends React.Component {
       favoriteMovies: authData.user.FavoriteMovies,
     };
     this.setState({
-      user: authData.user.UserID,
+      user: userObj,
     });
 
     localStorage.setItem('token', authData.token);
