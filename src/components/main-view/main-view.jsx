@@ -228,7 +228,7 @@ export class MainView extends React.Component {
             <Route
               path={`/users/:username`}
               render={({ match, history }) => {
-                if (user != match.params.username) return <Redirect to="/" />;
+                if (user.name != match.params.username) return <Redirect to="/" />;
                 return (
                   <Col>
                     <ProfileView
