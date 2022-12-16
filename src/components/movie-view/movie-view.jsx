@@ -18,7 +18,7 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, onBackClick, deleteMovie, addMovie, user } = this.props;
+    const { movie, onBackClick, removeMovie, addMovie, user } = this.props;
 
     return (
       <Container fluid className="movieViewContainer">
@@ -80,8 +80,8 @@ export class MovieView extends React.Component {
             >
               Back
             </Button>
-            {!user.favoriteMovies.includes(movie._id) && (
-              <Button onClick={() => addMovie(movie._id)} className="ml-3 my-2">
+            {!user.favoriteMovies.includes(movie._id) && 
+              <Button onClick={() => addMovie(movie._id)} className="ml-2 my-2">
                 Add to Favorites.
               </Button>
             )}
