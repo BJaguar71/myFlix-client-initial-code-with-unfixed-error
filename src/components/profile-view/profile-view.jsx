@@ -7,7 +7,7 @@ import { UserUpdate } from "./user-update";
 
 export function ProfileView(props) {
   const { movies } = props;
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('');
   const [favoriteMovies, setFavoriteMovies] = useState([]);
   const currentUser = props.user;
   const token = localStorage.getItem('token');
