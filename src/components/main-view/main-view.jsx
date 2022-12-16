@@ -79,24 +79,32 @@ export class MainView extends React.Component {
 
   // add movie to fave list
   addMovie(movieId) {
-    axios.post(`https:/t-flix.fly.dev/users/${this.state.user.userID}/movies/${movieId}`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-    })
-    .then((response) => {
-      alert('The movie was successfully added.');
-    })
-    .catch((err) => console.log(err));
+    axios
+      .post(
+        `https:/t-flix.fly.dev/users/${this.state.user.userID}/movies/${movieId}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        }
+      )
+      .then((response) => {
+        alert('The movie was successfully added.');
+      })
+      .catch((err) => console.log(err));
   }
 
   // delete movie from fav list
   deleteMovie(movieId) {
-    axios.delete(`https:/t-flix.fly.dev/users/${this.state.user.userID}/movies/${movieId}`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-    })
-    .then((response) => {
-      alert('The movie was successfully removed.');
-    })
-    .catch((err) => console.log(err));
+    axios
+      .delete(
+        `https:/t-flix.fly.dev/users/${this.state.user.userID}/movies/${movieId}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        }
+      )
+      .then((response) => {
+        alert('The movie was successfully removed.');
+      })
+      .catch((err) => console.log(err));
   }
 
   // Rendering the visual representation of the component
@@ -165,7 +173,7 @@ export class MainView extends React.Component {
                       movie={movies.find((m) => m._id === match.params.movieId)}
                       onBackClick={() => history.goBack()}
                       addMovie={(movieID) => this.addMovie(movieID)}
-                      deleteMovie={(movieID) => this.deleteMovie(movieID)}
+                      removeMovie={(movieID) => this.deleteMovie(movieID)}
                       user={user}
                     />
                   </Col>
@@ -228,7 +236,8 @@ export class MainView extends React.Component {
             <Route
               path={`/users/:username`}
               render={({ match, history }) => {
-                if (user.name != match.params.username) return <Redirect to="/" />;
+                if (user.name != match.params.username)
+                  return <Redirect to="/" />;
                 return (
                   <Col>
                     <ProfileView
