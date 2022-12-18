@@ -79,13 +79,12 @@ export class MainView extends React.Component {
 
   // add movie to fave list
   addMovie(movieId) {
-    axios
-      .post(
-        `https:/t-flix.fly.dev/users/${this.state.user.userID}/movies/${movieId}`,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-        }
-      )
+    axios({
+      method: 'post',
+      url: `https:/t-flix.fly.dev/users/${this.state.user.userID}/movies/${movieId}`,
+
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    })
       .then((response) => {
         alert('The movie was successfully added.');
       })
