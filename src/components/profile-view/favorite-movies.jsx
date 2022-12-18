@@ -41,7 +41,7 @@ export function FavoriteMovies(props) {
                     variant="outline-primary"
                     size="sm"
                     onClick={() => {
-                      handleMovieDelete(movie._id);
+                      removeMovie(movie._id);
                     }}
                   >
                     Remove
