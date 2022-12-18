@@ -93,13 +93,12 @@ export class MainView extends React.Component {
 
   // delete movie from fav list
   deleteMovie(movieId) {
-    axios
-      .delete(
-        `https:/t-flix.fly.dev/users/${this.state.user.userID}/movies/${movieId}`,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-        }
-      )
+    axios({
+      method: 'delete',
+      url: `https:/t-flix.fly.dev/users/${this.state.user.userID}/movies/${movieId}`,
+
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    })
       .then((response) => {
         alert('The movie was successfully removed.');
       })
