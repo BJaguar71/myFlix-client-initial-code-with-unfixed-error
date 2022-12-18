@@ -26,7 +26,7 @@ export function FavoriteMovies(props) {
                 </Link>
                 <Card.Body>
                   <Card.Title>{movie.Title}</Card.Title>
-                  <Card.Text>{movie.Summary}</Card.Text>
+                  <Card.Text className="text-truncate">{movie.Summary}</Card.Text>
                   <Link to={`/movies/${movie._id}`}>
                     <Button
                       className="button"
