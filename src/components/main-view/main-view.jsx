@@ -242,6 +242,7 @@ export class MainView extends React.Component {
                       movies={movies}
                       user={user}
                       onBackClick={() => history.goBack()}
+                      removeFavorites={(movieId) => this.deleteMovie(movieId)}
                     />
                   </Col>
                 );
