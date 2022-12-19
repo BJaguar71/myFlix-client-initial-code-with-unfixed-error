@@ -75,6 +75,7 @@ export function ProfileView(props) {
           favoriteMovies={favoriteMovies}
           currentUser={user.name}
           token={token}
+          removeMovie={props.removeFavorites}
         />
       </Row>
       <UserUpdate user={user} />
