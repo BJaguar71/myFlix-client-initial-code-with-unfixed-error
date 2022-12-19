@@ -25656,7 +25656,8 @@ class MainView extends (0, _reactDefault.default).Component {
                                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
                                             movies: movies,
                                             user: user,
-                                            onBackClick: ()=>history.goBack()
+                                            onBackClick: ()=>history.goBack(),
+                                            removeFavorites: (movieId)=>this.deleteMovie(movieId)
                                         }, void 0, false, void 0, void 0)
                                     }, void 0, false, void 0, void 0);
                                 }
@@ -39208,7 +39209,8 @@ function ProfileView(props) {
                     movies: movies,
                     favoriteMovies: favoriteMovies,
                     currentUser: user.name,
-                    token: token
+                    token: token,
+                    removeMovie: props.removeFavorites
                 }, void 0, false, {
                     fileName: "src/components/profile-view/profile-view.jsx",
                     lineNumber: 73,
@@ -39223,7 +39225,7 @@ function ProfileView(props) {
                 user: user
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 80,
+                lineNumber: 81,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
@@ -39233,7 +39235,7 @@ function ProfileView(props) {
                 children: "Delete profile"
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 81,
+                lineNumber: 82,
                 columnNumber: 7
             }, this)
         ]
@@ -39274,7 +39276,7 @@ var _reactRouterDom = require("react-router-dom");
 var _reactBootstrap = require("react-bootstrap");
 var _profileViewScss = require("./profile-view.scss");
 function FavoriteMovies(props) {
-    const { movies , favoriteMovies , currentUser , token  } = props;
+    const { movies , favoriteMovies , removeMovie  } = props;
     const favoriteMovieList = movies.filter((m)=>{
         return favoriteMovies.includes(m._id);
     });
