@@ -25442,7 +25442,7 @@ class MainView extends (0, _reactDefault.default).Component {
         // initial state is set to null
         this.state = {
             movies: [],
-            user: null
+            user: ""
         };
     }
     // updated the method to persist the login data
