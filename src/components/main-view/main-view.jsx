@@ -62,7 +62,7 @@ export class MainView extends React.Component {
   // adding a new GetMovie method in order to be able to make authenticated requests to the API and see the list of movies
   getMovies(token) {
     axios
-      .get('https://t-flix.fly.dev/movies', {
+      .get('https://movie-api.fly.dev/movies', {
         // passing the bearer authorization in the header of the http request to make authenticated request to te API
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -81,7 +81,7 @@ export class MainView extends React.Component {
   addMovie(movieId) {
     axios({
       method: 'post',
-      url: `https:/t-flix.fly.dev/users/${this.state.user.userID}/movies/${movieId}`,
+      url: `https://movie-api.fly.dev/users/${this.state.user.userID}/movies/${movieId}`,
 
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     })
@@ -95,7 +95,7 @@ export class MainView extends React.Component {
   deleteMovie(movieId) {
     axios({
       method: 'delete',
-      url: `https:/t-flix.fly.dev/users/${this.state.user.userID}/movies/${movieId}`,
+      url: `https://movie-api.fly.dev/users/${this.state.user.userID}/movies/${movieId}`,
 
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     })
