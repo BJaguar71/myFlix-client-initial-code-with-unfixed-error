@@ -41,7 +41,7 @@ export function LoginView(props) {
     const isReq = validate();
     if (isReq) {
       // send a request to the server for authentication
-      axios.post('https://movie-api.fly.dev/login', {
+      axios.post('https://t-flix.fly.dev/login', {
         Username: username,
         Password: password,
       })

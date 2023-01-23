@@ -27,7 +27,7 @@ export class MainView extends React.Component {
     // initial state is set to null
     this.state = {
       movies: [],
-      user: "",
+      user: null,
     };
   }
   // updated the method to persist the login data
@@ -36,7 +36,7 @@ export class MainView extends React.Component {
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
-        user: JSON.parse(localStorage.getItem('User')),
+        user: localStorage.getItem('user'),
       });
       // if the user is logged in then the getMovies method will be called (makes GET request to the movies endpoint)
       this.getMovies(accessToken);
@@ -45,24 +45,20 @@ export class MainView extends React.Component {
 
   /* When a user successfully logs in, this function will store the user's token in local storage to hepl user stay logged in */
   onLoggedIn(authData) {
-    const userObj = {
-      name: authData.user.Username,
-      userID: authData.user._id,
-      favoriteMovies: authData.user.FavoriteMovies,
-    };
+    console.log(authData);
     this.setState({
-      user: userObj,
+      user: authData.user.Username,
     });
 
     localStorage.setItem('token', authData.token);
-    localStorage.setItem('User', JSON.stringify(userObj));
+    localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
   }
 
   // adding a new GetMovie method in order to be able to make authenticated requests to the API and see the list of movies
   getMovies(token) {
     axios
-      .get('https://movie-api.fly.dev/movies', {
+      .get('https://t-flix.fly.dev/movies', {
         // passing the bearer authorization in the header of the http request to make authenticated request to te API
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -76,35 +72,6 @@ export class MainView extends React.Component {
         console.log(error);
       });
   }
-
-  // add movie to fave list
-  addMovie(movieId) {
-    axios({
-      method: 'post',
-      url: `https://movie-api.fly.dev/users/${this.state.user.userID}/movies/${movieId}`,
-
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-    })
-      .then((response) => {
-        alert('The movie was successfully added.');
-      })
-      .catch((err) => console.log(err));
-  }
-
-  // delete movie from fav list
-  deleteMovie(movieId) {
-    axios({
-      method: 'delete',
-      url: `https://movie-api.fly.dev/users/${this.state.user.userID}/movies/${movieId}`,
-
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-    })
-      .then((response) => {
-        alert('The movie was successfully removed.');
-      })
-      .catch((err) => console.log(err));
-  }
-
   // Rendering the visual representation of the component
   render() {
     const { movies, user } = this.state;
@@ -112,11 +79,11 @@ export class MainView extends React.Component {
     return (
       <Router>
         {/* placed Menubar */}
-        <Menubar user={user && user.name} />
+        <Menubar user={user} />
         {/* Username will appear on main view after successful login
         <Link to={`/users/${user}`}>{user}</Link> */}
         <Container>
-          <Row className="main-view justify-content-md-center mt-3">
+          <Row className="main-view justify-content-md-center">
             {/* Routing starts from here */}
             <Route
               exact
@@ -125,9 +92,13 @@ export class MainView extends React.Component {
                 /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
                 if (!user)
                   return (
-                    <Col>
-                      <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
-                    </Col>
+                    <Row>
+                      <Col>
+                        <LoginView
+                          onLoggedIn={(user) => this.onLoggedIn(user)}
+                        />
+                      </Col>
+                    </Row>
                   );
                 // before the movies have been loaded
                 if (movies.length === 0) return <div className="main-view" />;
@@ -145,7 +116,7 @@ export class MainView extends React.Component {
               render={() => {
                 if (user) return <Redirect to="/" />;
                 return (
-                  <Col>
+                  <Col lg={8} md={8}>
                     <RegistrationView />
                   </Col>
                 );
@@ -159,7 +130,7 @@ export class MainView extends React.Component {
                 }
                 if (!user)
                   return (
-                    <Col>
+                    <Col md={8}>
                       <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                       ;
                     </Col>
@@ -170,9 +141,6 @@ export class MainView extends React.Component {
                     <MovieView
                       movie={movies.find((m) => m._id === match.params.movieId)}
                       onBackClick={() => history.goBack()}
-                      addMovie={(movieID) => this.addMovie(movieID)}
-                      removeMovie={(movieID) => this.deleteMovie(movieID)}
-                      user={user}
                     />
                   </Col>
                 );
@@ -234,15 +202,13 @@ export class MainView extends React.Component {
             <Route
               path={`/users/:username`}
               render={({ match, history }) => {
-                if (user.name != match.params.username)
-                  return <Redirect to="/" />;
+                if (user != match.params.username) return <Redirect to="/" />;
                 return (
                   <Col>
                     <ProfileView
                       movies={movies}
                       user={user}
                       onBackClick={() => history.goBack()}
-                      removeFavorites={(movieId) => this.deleteMovie(movieId)}
                     />
                   </Col>
                 );

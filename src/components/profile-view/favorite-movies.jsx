@@ -7,7 +7,7 @@ import { Button, Card, Col } from 'react-bootstrap';
 import './profile-view.scss';
 
 export function FavoriteMovies(props) {
-  const { movies, favoriteMovies, removeMovie } = props;
+  const { movies, favoriteMovies, currentUser, token } = props;
   const favoriteMovieList = movies.filter((m) => {
     return favoriteMovies.includes(m._id);
   });
@@ -26,7 +26,7 @@ export function FavoriteMovies(props) {
                 </Link>
                 <Card.Body>
                   <Card.Title>{movie.Title}</Card.Title>
-                  <Card.Text className="text-truncate">{movie.Summary}</Card.Text>
+                  <Card.Text>{movie.Summary}</Card.Text>
                   <Link to={`/movies/${movie._id}`}>
                     <Button
                       className="button"
@@ -41,7 +41,7 @@ export function FavoriteMovies(props) {
                     variant="outline-primary"
                     size="sm"
                     onClick={() => {
-                      removeMovie(movie._id);
+                      handleMovieDelete(movie._id);
                     }}
                   >
                     Remove

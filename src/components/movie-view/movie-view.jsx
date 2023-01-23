@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Container, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './movie-view.scss';
+import axios from 'axios';
 
 export class MovieView extends React.Component {
   keypressCallback(event) {
@@ -17,10 +18,37 @@ export class MovieView extends React.Component {
     document.removeEventListener('keypress', this.keypressCallback);
   }
 
-  render() {
-    const { movie, onBackClick, removeMovie, addMovie, user } = this.props;
+  addMovie(movieId) {
+    const currentUser = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    axios
+      .post(`https://t-flix.fly.dev/users/${currentUser}/movies/${movieId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        alert('The movie was successfully added.');
+      })
+      .catch((err) => console.log(err));
+  }
 
-      console.log(movie);
+  deleteMovie(movieId) {
+    const currentUser = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    axios
+      .delete(`https://t-flix.fly.dev/users/${currentUser}/movies/${movieId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        alert('The movie was successfully removed.');
+        window.open(`users/${currentUser}`, '_self');
+      })
+      .catch((err) => console.log(err));
+  }
+
+  render() {
+    const { movie, onBackClick, deleteMovie, addMovie } =
+      this.props;
+
     return (
       <Container fluid className="movieViewContainer">
         <Row>
@@ -81,19 +109,11 @@ export class MovieView extends React.Component {
             >
               Back
             </Button>
-            {!user.favoriteMovies.includes(movie._id) && 
-              <Button onClick={() => addMovie(movie._id)} className="ml-2 my-2">
-                Add to Favorites.
-              </Button>
-            }
-            {user.favoriteMovies.includes(movie._id) && 
-              <Button
-                onClick={() => removeMovie(movie._id)}
-                className="ml-2 my-2"
-              >
-                Remove from Favorites.
-              </Button>
-            }
+            <Button
+            onClick={() => this.addMovie(movie._id)}
+            className="ml-2 my-2">Add to Favorites</Button>
+            <Button
+            onClick={() => this.deleteMovie(movie._id)} className="ml-2">Remove from Favorites</Button>
           </Col>
         </Row>
       </Container>
