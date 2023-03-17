@@ -41299,7 +41299,7 @@ function VisibilityFilterInput(props) {
 }
 _c = VisibilityFilterInput;
 exports.default = (0, _reactRedux.connect)(null, {
-    setFilter
+    setFilter: (0, _actions.setFilter)
 })(VisibilityFilterInput);
 var _c;
 $RefreshReg$(_c, "VisibilityFilterInput");
