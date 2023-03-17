@@ -7,12 +7,29 @@
   position: fixed;
 }
 
-.app-container {
-  width: auto;
-  background: #fff;
+.btn-outline-danger {
+  margin-left: 20px;
+}
+
+a {
+  margin: 5px;
 }
 
 
+
+
+
+img.movie-poster {
+  width: 432px;
+  height: 600px;
+}
+
+@media (min-width: 320px) and (max-width: 425px) {
+  div img.movie-poster {
+    width: 216px;
+    height: 340px;
+  }
+}
 
 .movie-button {
   color: #f5a9b86e;
@@ -52,28 +69,11 @@ div.card-title.h5, p.card-text, button.movie-button.btn.btn-link {
   }
 }
 
-img.movie-poster {
-  width: 432px;
-  height: 600px;
-}
-
-@media (min-width: 320px) and (max-width: 425px) {
-  div img.movie-poster {
-    width: 216px;
-    height: 340px;
-  }
-}
 
 
-
-
-
-.btn-outline-danger {
-  margin-left: 20px;
-}
-
-a {
-  margin: 5px;
+.app-container {
+  width: auto;
+  background: #fff;
 }
 
 /*# sourceMappingURL=index.2b25e0b4.css.map */

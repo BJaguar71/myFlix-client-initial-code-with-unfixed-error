@@ -143,8 +143,8 @@
     }
   }
 })({"1xC6H":[function(require,module,exports) {
-var Refresh = require("react-refresh/runtime");
-var ErrorOverlay = require("react-error-overlay");
+var Refresh = require("6f4529d5c246cb8e");
+var ErrorOverlay = require("c2aa1b3368644689");
 Refresh.injectIntoGlobalHook(window);
 window.$RefreshReg$ = function() {};
 window.$RefreshSig$ = function() {
@@ -163,11 +163,11 @@ window.addEventListener("parcelhmraccept", ()=>{
     ErrorOverlay.dismissRuntimeErrors();
 });
 
-},{"react-refresh/runtime":"786KC","react-error-overlay":"1dldy"}],"786KC":[function(require,module,exports) {
+},{"6f4529d5c246cb8e":"786KC","c2aa1b3368644689":"1dldy"}],"786KC":[function(require,module,exports) {
 "use strict";
-module.exports = require("./cjs/react-refresh-runtime.development.js");
+module.exports = require("4242234e5c031915");
 
-},{"./cjs/react-refresh-runtime.development.js":"hdge7"}],"hdge7":[function(require,module,exports) {
+},{"4242234e5c031915":"hdge7"}],"hdge7":[function(require,module,exports) {
 /** @license React v0.9.0
  * react-refresh-runtime.development.js
  *
@@ -628,7 +628,7 @@ module.exports = require("./cjs/react-refresh-runtime.development.js");
 })();
 
 },{}],"1dldy":[function(require,module,exports) {
-var process = require("process");
+var process = require("81f48cdef70e2240");
 !function(e, t) {
     module.exports = t();
 }(window, function() {
@@ -1043,7 +1043,7 @@ var process = require("process");
                 }
                 try {
                     u({}, "");
-                } catch (e1) {
+                } catch (e) {
                     u = function(e, t, r) {
                         return e[t] = r;
                     };
@@ -1092,10 +1092,10 @@ var process = require("process");
                             type: "normal",
                             arg: e.call(t, r)
                         };
-                    } catch (e1) {
+                    } catch (e) {
                         return {
                             type: "throw",
-                            arg: e1
+                            arg: e
                         };
                     }
                 }
@@ -1314,7 +1314,7 @@ var process = require("process");
             }(e.exports);
             try {
                 regeneratorRuntime = n;
-            } catch (e1) {
+            } catch (e) {
                 Function("r", "regeneratorRuntime = r")(n);
             }
         },
@@ -1835,9 +1835,9 @@ var process = require("process");
                         try {
                             var e = arguments[0];
                             "string" == typeof e && d.length > 0 && t(e, d[d.length - 1]);
-                        } catch (e1) {
+                        } catch (e) {
                             setTimeout(function() {
-                                throw e1;
+                                throw e;
                             });
                         }
                         return r.apply(this, arguments);
@@ -1968,8 +1968,8 @@ var process = require("process");
             function N(e, t, r, n, o, a, i) {
                 try {
                     var l = e[a](i), u = l.value;
-                } catch (e1) {
-                    return void r(e1);
+                } catch (e) {
+                    return void r(e);
                 }
                 l.done ? t(u) : Promise.resolve(u).then(n, o);
             }
@@ -2233,7 +2233,7 @@ var process = require("process");
                     var e = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : f;
                     if (!c) try {
                         s = Error.stackTraceLimit, Error.stackTraceLimit = e, c = !0;
-                    } catch (e1) {}
+                    } catch (e) {}
                 }(), p(), g("error", function(e, n) {
                     var o = function(e, t) {
                         for(var r, n, o = function(e) {
@@ -2358,10 +2358,10 @@ var process = require("process");
     ]);
 });
 
-},{"process":"jhUEF"}],"jhUEF":[function(require,module,exports) {
+},{"81f48cdef70e2240":"jhUEF"}],"jhUEF":[function(require,module,exports) {
 "use strict";
 
-},{}],"jVvJi":[function(require,module,exports) {
+},{}],"7a1Sg":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -2377,7 +2377,7 @@ import type {
 interface ParcelRequire {
   (string): mixed;
   cache: {|[string]: ParcelModule|};
-  hotData: mixed;
+  hotData: {|[string]: mixed|};
   Module: any;
   parent: ?ParcelRequire;
   isParcelRequire: true;
@@ -2419,7 +2419,7 @@ var OldModule = module.bundle.Module;
 function Module(moduleName) {
     OldModule.call(this, moduleName);
     this.hot = {
-        data: module.bundle.hotData,
+        data: module.bundle.hotData[moduleName],
         _acceptCallbacks: [],
         _disposeCallbacks: [],
         accept: function(fn) {
@@ -2429,10 +2429,11 @@ function Module(moduleName) {
             this._disposeCallbacks.push(fn);
         }
     };
-    module.bundle.hotData = undefined;
+    module.bundle.hotData[moduleName] = undefined;
 }
 module.bundle.Module = Module;
-var checkedAssets, acceptedAssets, assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
+module.bundle.hotData = {};
+var checkedAssets, assetsToDispose, assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
 function getHostname() {
     return HMR_HOST || (location.protocol.indexOf("http") === 0 ? location.hostname : "localhost");
 }
@@ -2455,8 +2456,8 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== "undefined") {
     } // $FlowFixMe
     ws.onmessage = async function(event) {
         checkedAssets = {} /*: {|[string]: boolean|} */ ;
-        acceptedAssets = {} /*: {|[string]: boolean|} */ ;
         assetsToAccept = [];
+        assetsToDispose = [];
         var data = JSON.parse(event.data);
         if (data.type === "update") {
             // Remove error overlay if there is one
@@ -2468,10 +2469,22 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== "undefined") {
             if (handled) {
                 console.clear(); // Dispatch custom event so other runtimes (e.g React Refresh) are aware.
                 if (typeof window !== "undefined" && typeof CustomEvent !== "undefined") window.dispatchEvent(new CustomEvent("parcelhmraccept"));
-                await hmrApplyUpdates(assets);
-                for(var i = 0; i < assetsToAccept.length; i++){
-                    var id = assetsToAccept[i][1];
-                    if (!acceptedAssets[id]) hmrAcceptRun(assetsToAccept[i][0], id);
+                await hmrApplyUpdates(assets); // Dispose all old assets.
+                let processedAssets = {} /*: {|[string]: boolean|} */ ;
+                for(let i = 0; i < assetsToDispose.length; i++){
+                    let id = assetsToDispose[i][1];
+                    if (!processedAssets[id]) {
+                        hmrDispose(assetsToDispose[i][0], id);
+                        processedAssets[id] = true;
+                    }
+                } // Run accept callbacks. This will also re-execute other disposed assets in topological order.
+                processedAssets = {};
+                for(let i = 0; i < assetsToAccept.length; i++){
+                    let id = assetsToAccept[i][1];
+                    if (!processedAssets[id]) {
+                        hmrAccept(assetsToAccept[i][0], id);
+                        processedAssets[id] = true;
+                    }
                 }
             } else fullReload();
         }
@@ -2724,30 +2737,42 @@ function hmrAcceptCheckOne(bundle, id, depsByBundle) {
     if (checkedAssets[id]) return true;
     checkedAssets[id] = true;
     var cached = bundle.cache[id];
-    assetsToAccept.push([
+    assetsToDispose.push([
         bundle,
         id
     ]);
-    if (!cached || cached.hot && cached.hot._acceptCallbacks.length) return true;
+    if (!cached || cached.hot && cached.hot._acceptCallbacks.length) {
+        assetsToAccept.push([
+            bundle,
+            id
+        ]);
+        return true;
+    }
 }
-function hmrAcceptRun(bundle, id) {
+function hmrDispose(bundle, id) {
     var cached = bundle.cache[id];
-    bundle.hotData = {};
-    if (cached && cached.hot) cached.hot.data = bundle.hotData;
+    bundle.hotData[id] = {};
+    if (cached && cached.hot) cached.hot.data = bundle.hotData[id];
     if (cached && cached.hot && cached.hot._disposeCallbacks.length) cached.hot._disposeCallbacks.forEach(function(cb) {
-        cb(bundle.hotData);
+        cb(bundle.hotData[id]);
     });
     delete bundle.cache[id];
-    bundle(id);
-    cached = bundle.cache[id];
+}
+function hmrAccept(bundle, id) {
+    // Execute the module.
+    bundle(id); // Run the accept callbacks in the new version of the module.
+    var cached = bundle.cache[id];
     if (cached && cached.hot && cached.hot._acceptCallbacks.length) cached.hot._acceptCallbacks.forEach(function(cb) {
         var assetsToAlsoAccept = cb(function() {
             return getParents(module.bundle.root, id);
         });
-        if (assetsToAlsoAccept && assetsToAccept.length) // $FlowFixMe[method-unbinding]
-        assetsToAccept.push.apply(assetsToAccept, assetsToAlsoAccept);
+        if (assetsToAlsoAccept && assetsToAccept.length) {
+            assetsToAlsoAccept.forEach(function(a) {
+                hmrDispose(a[0], a[1]);
+            }); // $FlowFixMe[method-unbinding]
+            assetsToAccept.push.apply(assetsToAccept, assetsToAlsoAccept);
+        }
     });
-    acceptedAssets[id] = true;
 }
 
 },{}],"d8Dch":[function(require,module,exports) {
@@ -2798,9 +2823,9 @@ const container = document.getElementsByClassName("app-container")[0];
 }
 },{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-dom":"j6uA9","react-bootstrap/Container":"hEdsw","./components/main-view/main-view":"4gflv","./index.scss":"lJZlQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iTorj":[function(require,module,exports) {
 "use strict";
-module.exports = require("./cjs/react-jsx-dev-runtime.development.js");
+module.exports = require("a32564ca89359cb0");
 
-},{"./cjs/react-jsx-dev-runtime.development.js":"48uCM"}],"48uCM":[function(require,module,exports) {
+},{"a32564ca89359cb0":"48uCM"}],"48uCM":[function(require,module,exports) {
 /** @license React v17.0.2
  * react-jsx-dev-runtime.development.js
  *
@@ -2811,8 +2836,8 @@ module.exports = require("./cjs/react-jsx-dev-runtime.development.js");
  */ "use strict";
 (function() {
     "use strict";
-    var React = require("react");
-    var _assign = require("object-assign");
+    var React = require("f20332ca560faee7");
+    var _assign = require("2e999b8efa8de9b3");
     // ATTENTION
     // When adding new symbols to this file,
     // Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
@@ -3086,16 +3111,16 @@ module.exports = require("./cjs/react-jsx-dev-runtime.development.js");
                 } else {
                     try {
                         Fake.call();
-                    } catch (x1) {
-                        control = x1;
+                    } catch (x) {
+                        control = x;
                     }
                     fn.call(Fake.prototype);
                 }
             } else {
                 try {
                     throw Error();
-                } catch (x2) {
-                    control = x2;
+                } catch (x) {
+                    control = x;
                 }
                 fn();
             }
@@ -3579,11 +3604,11 @@ module.exports = require("./cjs/react-jsx-dev-runtime.development.js");
     exports.jsxDEV = jsxDEV$1;
 })();
 
-},{"react":"21dqq","object-assign":"7OXxh"}],"21dqq":[function(require,module,exports) {
+},{"f20332ca560faee7":"21dqq","2e999b8efa8de9b3":"7OXxh"}],"21dqq":[function(require,module,exports) {
 "use strict";
-module.exports = require("./cjs/react.development.js");
+module.exports = require("2678c720952b292b");
 
-},{"./cjs/react.development.js":"6YvXz"}],"6YvXz":[function(require,module,exports) {
+},{"2678c720952b292b":"6YvXz"}],"6YvXz":[function(require,module,exports) {
 /** @license React v17.0.2
  * react.development.js
  *
@@ -3594,7 +3619,7 @@ module.exports = require("./cjs/react.development.js");
  */ "use strict";
 (function() {
     "use strict";
-    var _assign = require("object-assign");
+    var _assign = require("d94ffc17d2634dd6");
     // TODO: this is special because it gets imported during build.
     var ReactVersion = "17.0.2";
     // ATTENTION
@@ -4775,16 +4800,16 @@ module.exports = require("./cjs/react.development.js");
                 } else {
                     try {
                         Fake.call();
-                    } catch (x1) {
-                        control = x1;
+                    } catch (x) {
+                        control = x;
                     }
                     fn.call(Fake.prototype);
                 }
             } else {
                 try {
                     throw Error();
-                } catch (x2) {
-                    control = x2;
+                } catch (x) {
+                    control = x;
                 }
                 fn();
             }
@@ -5162,7 +5187,7 @@ module.exports = require("./cjs/react.development.js");
     exports.version = ReactVersion;
 })();
 
-},{"object-assign":"7OXxh"}],"7OXxh":[function(require,module,exports) {
+},{"d94ffc17d2634dd6":"7OXxh"}],"7OXxh":[function(require,module,exports) {
 /*
 object-assign
 (c) Sindre Sorhus
@@ -5231,9 +5256,9 @@ function checkDCE() {
     // a false positive.
     throw new Error("^_^");
 }
-module.exports = require("./cjs/react-dom.development.js");
+module.exports = require("f23424488f7cb358");
 
-},{"./cjs/react-dom.development.js":"3iA9v"}],"3iA9v":[function(require,module,exports) {
+},{"f23424488f7cb358":"3iA9v"}],"3iA9v":[function(require,module,exports) {
 /** @license React v17.0.2
  * react-dom.development.js
  *
@@ -5244,10 +5269,10 @@ module.exports = require("./cjs/react-dom.development.js");
  */ "use strict";
 (function() {
     "use strict";
-    var React = require("react");
-    var _assign = require("object-assign");
-    var Scheduler = require("scheduler");
-    var tracing = require("scheduler/tracing");
+    var React = require("a1430ef54f45e56e");
+    var _assign = require("bb2f9728d17dff52");
+    var Scheduler = require("16f0a7341539de20");
+    var tracing = require("fb35f8acb27e6018");
     var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
     // by calls to these methods by a Babel plugin.
     //
@@ -5972,16 +5997,16 @@ module.exports = require("./cjs/react-dom.development.js");
                 } else {
                     try {
                         Fake.call();
-                    } catch (x1) {
-                        control = x1;
+                    } catch (x) {
+                        control = x;
                     }
                     fn.call(Fake.prototype);
                 }
             } else {
                 try {
                     throw Error();
-                } catch (x2) {
-                    control = x2;
+                } catch (x) {
+                    control = x;
                 }
                 fn();
             }
@@ -16931,7 +16956,7 @@ module.exports = require("./cjs/react-dom.development.js");
                         // if the component re-renders for a different reason and by that
                         // time the reducer has changed.
                         return;
-                    } catch (error1) {} finally{
+                    } catch (error) {} finally{
                         ReactCurrentDispatcher$1.current = prevDispatcher;
                     }
                 }
@@ -22650,7 +22675,7 @@ module.exports = require("./cjs/react-dom.development.js");
         new Set([
             nonExtensibleObject
         ]);
-    /* eslint-enable no-new */ } catch (e1) {
+    /* eslint-enable no-new */ } catch (e) {
         // TODO: Consider warning about bad polyfills
         hasBadMapPolyfill = true;
     }
@@ -23698,11 +23723,11 @@ module.exports = require("./cjs/react-dom.development.js");
     exports.version = ReactVersion;
 })();
 
-},{"react":"21dqq","object-assign":"7OXxh","scheduler":"juvHo","scheduler/tracing":"9ZY7A"}],"juvHo":[function(require,module,exports) {
+},{"a1430ef54f45e56e":"21dqq","bb2f9728d17dff52":"7OXxh","16f0a7341539de20":"juvHo","fb35f8acb27e6018":"9ZY7A"}],"juvHo":[function(require,module,exports) {
 "use strict";
-module.exports = require("./cjs/scheduler.development.js");
+module.exports = require("1d7cb6ea2e2314f5");
 
-},{"./cjs/scheduler.development.js":"RqdIf"}],"RqdIf":[function(require,module,exports) {
+},{"1d7cb6ea2e2314f5":"RqdIf"}],"RqdIf":[function(require,module,exports) {
 /** @license React v0.20.2
  * scheduler.development.js
  *
@@ -24175,9 +24200,9 @@ module.exports = require("./cjs/scheduler.development.js");
 
 },{}],"9ZY7A":[function(require,module,exports) {
 "use strict";
-module.exports = require("./cjs/scheduler-tracing.development.js");
+module.exports = require("ce8c30e30ac172d7");
 
-},{"./cjs/scheduler-tracing.development.js":"dClkR"}],"dClkR":[function(require,module,exports) {
+},{"ce8c30e30ac172d7":"dClkR"}],"dClkR":[function(require,module,exports) {
 /** @license React v0.20.2
  * scheduler-tracing.development.js
  *
@@ -24486,7 +24511,7 @@ exports.default = Container;
         }
         return classes.join(" ");
     }
-    if (module.exports) {
+    if (0, module.exports) {
         classNames.default = classNames;
         module.exports = classNames;
     } else if (typeof define === "function" && typeof define.amd === "object" && define.amd) // register as 'classnames', consistent with npm package name
@@ -24580,9 +24605,9 @@ exports.default = ThemeProvider;
 
 },{"react":"21dqq","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6AEwr":[function(require,module,exports) {
 "use strict";
-module.exports = require("./cjs/react-jsx-runtime.development.js");
+module.exports = require("45fb1281a625646f");
 
-},{"./cjs/react-jsx-runtime.development.js":"kujY4"}],"kujY4":[function(require,module,exports) {
+},{"45fb1281a625646f":"kujY4"}],"kujY4":[function(require,module,exports) {
 /** @license React v17.0.2
  * react-jsx-runtime.development.js
  *
@@ -24593,8 +24618,8 @@ module.exports = require("./cjs/react-jsx-runtime.development.js");
  */ "use strict";
 (function() {
     "use strict";
-    var React = require("react");
-    var _assign = require("object-assign");
+    var React = require("c5723259e1018e4b");
+    var _assign = require("f80037941432ac7e");
     // ATTENTION
     // When adding new symbols to this file,
     // Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
@@ -24868,16 +24893,16 @@ module.exports = require("./cjs/react-jsx-runtime.development.js");
                 } else {
                     try {
                         Fake.call();
-                    } catch (x1) {
-                        control = x1;
+                    } catch (x) {
+                        control = x;
                     }
                     fn.call(Fake.prototype);
                 }
             } else {
                 try {
                     throw Error();
-                } catch (x2) {
-                    control = x2;
+                } catch (x) {
+                    control = x;
                 }
                 fn();
             }
@@ -25373,7 +25398,7 @@ module.exports = require("./cjs/react-jsx-runtime.development.js");
     exports.jsxs = jsxs;
 })();
 
-},{"react":"21dqq","object-assign":"7OXxh"}],"gkKU3":[function(require,module,exports) {
+},{"c5723259e1018e4b":"21dqq","f80037941432ac7e":"7OXxh"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -25705,7 +25730,7 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","react-bootstrap":"3AD9A","react-router-dom":"cHIiW","./main-view.scss":"eBaMl","../menubar/menubar":"lIU5g","../registration-view/registration-view":"3U8r7","../login-view/login-view":"9YtA0","../movie-view/movie-view":"ggaUx","../director-view/director-view":"9tpci","../profile-view/profile-view":"2vVqf","../profile-view/user-update":"hucfh","../genre-view/genre-view":"4tuA0","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-redux":"bdVon","../../actions/actions":"biFwH","../movies-list/movies-list":"bPxKK"}],"jo6P5":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","axios":"jo6P5","react-bootstrap":"3AD9A","react-router-dom":"cHIiW","./main-view.scss":"eBaMl","../menubar/menubar":"lIU5g","../registration-view/registration-view":"3U8r7","../login-view/login-view":"9YtA0","../movie-view/movie-view":"ggaUx","../director-view/director-view":"9tpci","../profile-view/profile-view":"2vVqf","../profile-view/user-update":"hucfh","../genre-view/genre-view":"4tuA0","react-redux":"bdVon","../../actions/actions":"biFwH","../movies-list/movies-list":"bPxKK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jo6P5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _axiosJsDefault.default));
@@ -25721,13 +25746,15 @@ parcelHelpers.export(exports, "isAxiosError", ()=>isAxiosError);
 parcelHelpers.export(exports, "spread", ()=>spread);
 parcelHelpers.export(exports, "toFormData", ()=>toFormData);
 parcelHelpers.export(exports, "AxiosHeaders", ()=>AxiosHeaders);
+parcelHelpers.export(exports, "HttpStatusCode", ()=>HttpStatusCode);
 parcelHelpers.export(exports, "formToJSON", ()=>formToJSON);
+parcelHelpers.export(exports, "mergeConfig", ()=>mergeConfig);
 var _axiosJs = require("./lib/axios.js");
 var _axiosJsDefault = parcelHelpers.interopDefault(_axiosJs);
 // This module is intended to unwrap Axios default export as named.
 // Keep top-level export same with static properties
 // so that it can keep same with es module or cjs
-const { Axios , AxiosError , CanceledError , isCancel , CancelToken , VERSION , all , Cancel , isAxiosError , spread , toFormData , AxiosHeaders , formToJSON  } = (0, _axiosJsDefault.default);
+const { Axios , AxiosError , CanceledError , isCancel , CancelToken , VERSION , all , Cancel , isAxiosError , spread , toFormData , AxiosHeaders , HttpStatusCode , formToJSON , mergeConfig  } = (0, _axiosJsDefault.default);
 
 },{"./lib/axios.js":"63MyY","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"63MyY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -25761,6 +25788,8 @@ var _isAxiosErrorJs = require("./helpers/isAxiosError.js");
 var _isAxiosErrorJsDefault = parcelHelpers.interopDefault(_isAxiosErrorJs);
 var _axiosHeadersJs = require("./core/AxiosHeaders.js");
 var _axiosHeadersJsDefault = parcelHelpers.interopDefault(_axiosHeadersJs);
+var _httpStatusCodeJs = require("./helpers/HttpStatusCode.js");
+var _httpStatusCodeJsDefault = parcelHelpers.interopDefault(_httpStatusCodeJs);
 "use strict";
 /**
  * Create an instance of Axios
@@ -25806,13 +25835,16 @@ axios.all = function all(promises) {
 axios.spread = (0, _spreadJsDefault.default);
 // Expose isAxiosError
 axios.isAxiosError = (0, _isAxiosErrorJsDefault.default);
+// Expose mergeConfig
+axios.mergeConfig = (0, _mergeConfigJsDefault.default);
 axios.AxiosHeaders = (0, _axiosHeadersJsDefault.default);
 axios.formToJSON = (thing)=>(0, _formDataToJSONJsDefault.default)((0, _utilsJsDefault.default).isHTMLForm(thing) ? new FormData(thing) : thing);
+axios.HttpStatusCode = (0, _httpStatusCodeJsDefault.default);
 axios.default = axios;
 // this module should only have a default export
 exports.default = axios;
 
-},{"./utils.js":"5By4s","./helpers/bind.js":"haRQb","./core/Axios.js":"cpqD8","./core/mergeConfig.js":"b85oP","./defaults/index.js":"hXfHM","./helpers/formDataToJSON.js":"01RfH","./cancel/CanceledError.js":"9PwCG","./cancel/CancelToken.js":"45wzn","./cancel/isCancel.js":"a0VmF","./env/data.js":"h29L9","./helpers/toFormData.js":"ajoez","./core/AxiosError.js":"3u8Tl","./helpers/spread.js":"dyQ8N","./helpers/isAxiosError.js":"eyiLq","./core/AxiosHeaders.js":"cgSSx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5By4s":[function(require,module,exports) {
+},{"./utils.js":"5By4s","./helpers/bind.js":"haRQb","./core/Axios.js":"cpqD8","./core/mergeConfig.js":"b85oP","./defaults/index.js":"hXfHM","./helpers/formDataToJSON.js":"01RfH","./cancel/CanceledError.js":"9PwCG","./cancel/CancelToken.js":"45wzn","./cancel/isCancel.js":"a0VmF","./env/data.js":"h29L9","./helpers/toFormData.js":"ajoez","./core/AxiosError.js":"3u8Tl","./helpers/spread.js":"dyQ8N","./helpers/isAxiosError.js":"eyiLq","./core/AxiosHeaders.js":"cgSSx","./helpers/HttpStatusCode.js":"fdR61","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5By4s":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _bindJs = require("./helpers/bind.js");
@@ -26023,7 +26055,10 @@ function findKey(obj, key) {
     }
     return null;
 }
-const _global = typeof self === "undefined" ? typeof global === "undefined" ? undefined : global : self;
+const _global = (()=>{
+    /*eslint no-undef:0*/ if (typeof globalThis !== "undefined") return globalThis;
+    return typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : global;
+})();
 const isContextDefined = (context)=>!isUndefined(context) && context !== _global;
 /**
  * Accepts varargs expecting each argument to be an object, then
@@ -26204,7 +26239,7 @@ const isTypedArray = ((TypedArray)=>{
 };
 /* Checking if the kindOfTest function returns true when passed an HTMLFormElement. */ const isHTMLForm = kindOfTest("HTMLFormElement");
 const toCamelCase = (str)=>{
-    return str.toLowerCase().replace(/[_-\s]([a-z\d])(\w*)/g, function replacer(m, p1, p2) {
+    return str.toLowerCase().replace(/[-_\s]([a-z\d])(\w*)/g, function replacer(m, p1, p2) {
         return p1.toUpperCase() + p2;
     });
 };
@@ -26262,6 +26297,28 @@ const toFiniteNumber = (value, defaultValue)=>{
     value = +value;
     return Number.isFinite(value) ? value : defaultValue;
 };
+const ALPHA = "abcdefghijklmnopqrstuvwxyz";
+const DIGIT = "0123456789";
+const ALPHABET = {
+    DIGIT,
+    ALPHA,
+    ALPHA_DIGIT: ALPHA + ALPHA.toUpperCase() + DIGIT
+};
+const generateString = (size = 16, alphabet = ALPHABET.ALPHA_DIGIT)=>{
+    let str = "";
+    const { length  } = alphabet;
+    while(size--)str += alphabet[Math.random() * length | 0];
+    return str;
+};
+/**
+ * If the thing is a FormData object, return true, otherwise return false.
+ *
+ * @param {unknown} thing - The thing to check.
+ *
+ * @returns {boolean}
+ */ function isSpecCompliantForm(thing) {
+    return !!(thing && isFunction(thing.append) && thing[Symbol.toStringTag] === "FormData" && thing[Symbol.iterator]);
+}
 const toJSONObject = (obj)=>{
     const stack = new Array(10);
     const visit = (source, i)=>{
@@ -26328,6 +26385,9 @@ exports.default = {
     findKey,
     global: _global,
     isContextDefined,
+    ALPHABET,
+    generateString,
+    isSpecCompliantForm,
     toJSONObject
 };
 
@@ -26460,8 +26520,8 @@ const validators = (0, _validatorJsDefault.default).validators;
         }
         try {
             promise = (0, _dispatchRequestJsDefault.default).call(this, newConfig);
-        } catch (error1) {
-            return Promise.reject(error1);
+        } catch (error) {
+            return Promise.reject(error);
         }
         i = 0;
         len = responseInterceptorChain.length;
@@ -26607,9 +26667,10 @@ var _utilsJs = require("../utils.js");
 var _utilsJsDefault = parcelHelpers.interopDefault(_utilsJs);
 var _axiosErrorJs = require("../core/AxiosError.js");
 var _axiosErrorJsDefault = parcelHelpers.interopDefault(_axiosErrorJs);
-var _formDataJs = require("../env/classes/FormData.js");
+// temporary hotfix to avoid circular references until AxiosURLSearchParams is refactored
+var _formDataJs = require("../platform/node/classes/FormData.js");
 var _formDataJsDefault = parcelHelpers.interopDefault(_formDataJs);
-var Buffer = require("buffer").Buffer;
+var Buffer = require("9286f151294d0a93").Buffer;
 "use strict";
 /**
  * Determines if the given thing is a array or js object.
@@ -26658,15 +26719,6 @@ const predicates = (0, _utilsJsDefault.default).toFlatObject((0, _utilsJsDefault
     return /^is[A-Z]/.test(prop);
 });
 /**
- * If the thing is a FormData object, return true, otherwise return false.
- *
- * @param {unknown} thing - The thing to check.
- *
- * @returns {boolean}
- */ function isSpecCompliant(thing) {
-    return thing && (0, _utilsJsDefault.default).isFunction(thing.append) && thing[Symbol.toStringTag] === "FormData" && thing[Symbol.iterator];
-}
-/**
  * Convert a data object to FormData
  *
  * @param {Object} obj
@@ -26705,7 +26757,7 @@ const predicates = (0, _utilsJsDefault.default).toFlatObject((0, _utilsJsDefault
     const dots = options.dots;
     const indexes = options.indexes;
     const _Blob = options.Blob || typeof Blob !== "undefined" && Blob;
-    const useBlob = _Blob && isSpecCompliant(formData);
+    const useBlob = _Blob && (0, _utilsJsDefault.default).isSpecCompliantForm(formData);
     if (!(0, _utilsJsDefault.default).isFunction(visitor)) throw new TypeError("visitor must be a function");
     function convertValue(value) {
         if (value === null) return "";
@@ -26733,7 +26785,7 @@ const predicates = (0, _utilsJsDefault.default).toFlatObject((0, _utilsJsDefault
                 key = metaTokens ? key : key.slice(0, -2);
                 // eslint-disable-next-line no-param-reassign
                 value = JSON.stringify(value);
-            } else if ((0, _utilsJsDefault.default).isArray(value) && isFlatArray(value) || (0, _utilsJsDefault.default).isFileList(value) || (0, _utilsJsDefault.default).endsWith(key, "[]") && (arr = (0, _utilsJsDefault.default).toArray(value))) {
+            } else if ((0, _utilsJsDefault.default).isArray(value) && isFlatArray(value) || ((0, _utilsJsDefault.default).isFileList(value) || (0, _utilsJsDefault.default).endsWith(key, "[]")) && (arr = (0, _utilsJsDefault.default).toArray(value))) {
                 // eslint-disable-next-line no-param-reassign
                 key = removeBrackets(key);
                 arr.forEach(function each(el, index) {
@@ -26773,22 +26825,22 @@ const predicates = (0, _utilsJsDefault.default).toFlatObject((0, _utilsJsDefault
 }
 exports.default = toFormData;
 
-},{"buffer":"fCgem","../utils.js":"5By4s","../core/AxiosError.js":"3u8Tl","../env/classes/FormData.js":"lSnyf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fCgem":[function(require,module,exports) {
+},{"9286f151294d0a93":"fCgem","../utils.js":"5By4s","../core/AxiosError.js":"3u8Tl","../platform/node/classes/FormData.js":"aFlee","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fCgem":[function(require,module,exports) {
 /*!
  * The buffer module from node.js, for the browser.
  *
  * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
  */ /* eslint-disable no-proto */ "use strict";
-const base64 = require("base64-js");
-const ieee754 = require("ieee754");
-const customInspectSymbol = typeof Symbol === "function" && typeof Symbol["for"] === "function" // eslint-disable-line dot-notation
+var base64 = require("3555fa5d71601c03");
+var ieee754 = require("c931ef0bd685be12");
+var customInspectSymbol = typeof Symbol === "function" && typeof Symbol["for"] === "function" // eslint-disable-line dot-notation
  ? Symbol["for"]("nodejs.util.inspect.custom") // eslint-disable-line dot-notation
  : null;
 exports.Buffer = Buffer;
 exports.SlowBuffer = SlowBuffer;
 exports.INSPECT_MAX_BYTES = 50;
-const K_MAX_LENGTH = 0x7fffffff;
+var K_MAX_LENGTH = 0x7fffffff;
 exports.kMaxLength = K_MAX_LENGTH;
 /**
  * If `Buffer.TYPED_ARRAY_SUPPORT`:
@@ -26808,8 +26860,8 @@ if (!Buffer.TYPED_ARRAY_SUPPORT && typeof console !== "undefined" && typeof cons
 function typedArraySupport() {
     // Can typed array instances can be augmented?
     try {
-        const arr = new Uint8Array(1);
-        const proto = {
+        var arr = new Uint8Array(1);
+        var proto = {
             foo: function() {
                 return 42;
             }
@@ -26838,7 +26890,7 @@ Object.defineProperty(Buffer.prototype, "offset", {
 function createBuffer(length) {
     if (length > K_MAX_LENGTH) throw new RangeError('The value "' + length + '" is invalid for option "size"');
     // Return an augmented `Uint8Array` instance
-    const buf = new Uint8Array(length);
+    var buf = new Uint8Array(length);
     Object.setPrototypeOf(buf, Buffer.prototype);
     return buf;
 }
@@ -26867,9 +26919,9 @@ function from(value, encodingOrOffset, length) {
     if (isInstance(value, ArrayBuffer) || value && isInstance(value.buffer, ArrayBuffer)) return fromArrayBuffer(value, encodingOrOffset, length);
     if (typeof SharedArrayBuffer !== "undefined" && (isInstance(value, SharedArrayBuffer) || value && isInstance(value.buffer, SharedArrayBuffer))) return fromArrayBuffer(value, encodingOrOffset, length);
     if (typeof value === "number") throw new TypeError('The "value" argument must not be of type number. Received type number');
-    const valueOf = value.valueOf && value.valueOf();
+    var valueOf = value.valueOf && value.valueOf();
     if (valueOf != null && valueOf !== value) return Buffer.from(valueOf, encodingOrOffset, length);
-    const b = fromObject(value);
+    var b = fromObject(value);
     if (b) return b;
     if (typeof Symbol !== "undefined" && Symbol.toPrimitive != null && typeof value[Symbol.toPrimitive] === "function") return Buffer.from(value[Symbol.toPrimitive]("string"), encodingOrOffset, length);
     throw new TypeError("The first argument must be one of type string, Buffer, ArrayBuffer, Array, or Array-like Object. Received type " + typeof value);
@@ -26924,9 +26976,9 @@ function allocUnsafe(size) {
 function fromString(string, encoding) {
     if (typeof encoding !== "string" || encoding === "") encoding = "utf8";
     if (!Buffer.isEncoding(encoding)) throw new TypeError("Unknown encoding: " + encoding);
-    const length = byteLength(string, encoding) | 0;
-    let buf = createBuffer(length);
-    const actual = buf.write(string, encoding);
+    var length = byteLength(string, encoding) | 0;
+    var buf = createBuffer(length);
+    var actual = buf.write(string, encoding);
     if (actual !== length) // Writing a hex string, for example, that contains invalid characters will
     // cause everything after the first invalid character to be ignored. (e.g.
     // 'abxxcd' will be treated as 'ab')
@@ -26934,14 +26986,14 @@ function fromString(string, encoding) {
     return buf;
 }
 function fromArrayLike(array) {
-    const length = array.length < 0 ? 0 : checked(array.length) | 0;
-    const buf = createBuffer(length);
-    for(let i = 0; i < length; i += 1)buf[i] = array[i] & 255;
+    var length = array.length < 0 ? 0 : checked(array.length) | 0;
+    var buf = createBuffer(length);
+    for(var i = 0; i < length; i += 1)buf[i] = array[i] & 255;
     return buf;
 }
 function fromArrayView(arrayView) {
     if (isInstance(arrayView, Uint8Array)) {
-        const copy = new Uint8Array(arrayView);
+        var copy = new Uint8Array(arrayView);
         return fromArrayBuffer(copy.buffer, copy.byteOffset, copy.byteLength);
     }
     return fromArrayLike(arrayView);
@@ -26949,7 +27001,7 @@ function fromArrayView(arrayView) {
 function fromArrayBuffer(array, byteOffset, length) {
     if (byteOffset < 0 || array.byteLength < byteOffset) throw new RangeError('"offset" is outside of buffer bounds');
     if (array.byteLength < byteOffset + (length || 0)) throw new RangeError('"length" is outside of buffer bounds');
-    let buf;
+    var buf;
     if (byteOffset === undefined && length === undefined) buf = new Uint8Array(array);
     else if (length === undefined) buf = new Uint8Array(array, byteOffset);
     else buf = new Uint8Array(array, byteOffset, length);
@@ -26959,8 +27011,8 @@ function fromArrayBuffer(array, byteOffset, length) {
 }
 function fromObject(obj) {
     if (Buffer.isBuffer(obj)) {
-        const len = checked(obj.length) | 0;
-        const buf = createBuffer(len);
+        var len = checked(obj.length) | 0;
+        var buf = createBuffer(len);
         if (buf.length === 0) return buf;
         obj.copy(buf, 0, 0, len);
         return buf;
@@ -26990,9 +27042,9 @@ Buffer.compare = function compare(a, b) {
     if (isInstance(b, Uint8Array)) b = Buffer.from(b, b.offset, b.byteLength);
     if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) throw new TypeError('The "buf1", "buf2" arguments must be one of type Buffer or Uint8Array');
     if (a === b) return 0;
-    let x = a.length;
-    let y = b.length;
-    for(let i = 0, len = Math.min(x, y); i < len; ++i)if (a[i] !== b[i]) {
+    var x = a.length;
+    var y = b.length;
+    for(var i = 0, len = Math.min(x, y); i < len; ++i)if (a[i] !== b[i]) {
         x = a[i];
         y = b[i];
         break;
@@ -27022,20 +27074,18 @@ Buffer.isEncoding = function isEncoding(encoding) {
 Buffer.concat = function concat(list, length) {
     if (!Array.isArray(list)) throw new TypeError('"list" argument must be an Array of Buffers');
     if (list.length === 0) return Buffer.alloc(0);
-    let i;
+    var i;
     if (length === undefined) {
         length = 0;
         for(i = 0; i < list.length; ++i)length += list[i].length;
     }
-    const buffer = Buffer.allocUnsafe(length);
-    let pos = 0;
+    var buffer = Buffer.allocUnsafe(length);
+    var pos = 0;
     for(i = 0; i < list.length; ++i){
-        let buf = list[i];
+        var buf = list[i];
         if (isInstance(buf, Uint8Array)) {
-            if (pos + buf.length > buffer.length) {
-                if (!Buffer.isBuffer(buf)) buf = Buffer.from(buf);
-                buf.copy(buffer, pos);
-            } else Uint8Array.prototype.set.call(buffer, buf, pos);
+            if (pos + buf.length > buffer.length) Buffer.from(buf).copy(buffer, pos);
+            else Uint8Array.prototype.set.call(buffer, buf, pos);
         } else if (!Buffer.isBuffer(buf)) throw new TypeError('"list" argument must be an Array of Buffers');
         else buf.copy(buffer, pos);
         pos += buf.length;
@@ -27046,11 +27096,11 @@ function byteLength(string, encoding) {
     if (Buffer.isBuffer(string)) return string.length;
     if (ArrayBuffer.isView(string) || isInstance(string, ArrayBuffer)) return string.byteLength;
     if (typeof string !== "string") throw new TypeError('The "string" argument must be one of type string, Buffer, or ArrayBuffer. Received type ' + typeof string);
-    const len = string.length;
-    const mustMatch = arguments.length > 2 && arguments[2] === true;
+    var len = string.length;
+    var mustMatch = arguments.length > 2 && arguments[2] === true;
     if (!mustMatch && len === 0) return 0;
     // Use a for loop to avoid recursion
-    let loweredCase = false;
+    var loweredCase = false;
     for(;;)switch(encoding){
         case "ascii":
         case "latin1":
@@ -27077,7 +27127,7 @@ function byteLength(string, encoding) {
 }
 Buffer.byteLength = byteLength;
 function slowToString(encoding, start, end) {
-    let loweredCase = false;
+    var loweredCase = false;
     // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
     // property of a typed array.
     // This behaves neither like String nor Uint8Array in that we set start/end
@@ -27127,29 +27177,29 @@ function slowToString(encoding, start, end) {
 // See: https://github.com/feross/buffer/issues/154
 Buffer.prototype._isBuffer = true;
 function swap(b, n, m) {
-    const i = b[n];
+    var i = b[n];
     b[n] = b[m];
     b[m] = i;
 }
 Buffer.prototype.swap16 = function swap16() {
-    const len = this.length;
+    var len = this.length;
     if (len % 2 !== 0) throw new RangeError("Buffer size must be a multiple of 16-bits");
-    for(let i = 0; i < len; i += 2)swap(this, i, i + 1);
+    for(var i = 0; i < len; i += 2)swap(this, i, i + 1);
     return this;
 };
 Buffer.prototype.swap32 = function swap32() {
-    const len = this.length;
+    var len = this.length;
     if (len % 4 !== 0) throw new RangeError("Buffer size must be a multiple of 32-bits");
-    for(let i = 0; i < len; i += 4){
+    for(var i = 0; i < len; i += 4){
         swap(this, i, i + 3);
         swap(this, i + 1, i + 2);
     }
     return this;
 };
 Buffer.prototype.swap64 = function swap64() {
-    const len = this.length;
+    var len = this.length;
     if (len % 8 !== 0) throw new RangeError("Buffer size must be a multiple of 64-bits");
-    for(let i = 0; i < len; i += 8){
+    for(var i = 0; i < len; i += 8){
         swap(this, i, i + 7);
         swap(this, i + 1, i + 6);
         swap(this, i + 2, i + 5);
@@ -27158,7 +27208,7 @@ Buffer.prototype.swap64 = function swap64() {
     return this;
 };
 Buffer.prototype.toString = function toString() {
-    const length = this.length;
+    var length = this.length;
     if (length === 0) return "";
     if (arguments.length === 0) return utf8Slice(this, 0, length);
     return slowToString.apply(this, arguments);
@@ -27170,8 +27220,8 @@ Buffer.prototype.equals = function equals(b) {
     return Buffer.compare(this, b) === 0;
 };
 Buffer.prototype.inspect = function inspect() {
-    let str = "";
-    const max = exports.INSPECT_MAX_BYTES;
+    var str = "";
+    var max = exports.INSPECT_MAX_BYTES;
     str = this.toString("hex", 0, max).replace(/(.{2})/g, "$1 ").trim();
     if (this.length > max) str += " ... ";
     return "<Buffer " + str + ">";
@@ -27193,12 +27243,12 @@ Buffer.prototype.compare = function compare(target, start, end, thisStart, thisE
     thisStart >>>= 0;
     thisEnd >>>= 0;
     if (this === target) return 0;
-    let x = thisEnd - thisStart;
-    let y = end - start;
-    const len = Math.min(x, y);
-    const thisCopy = this.slice(thisStart, thisEnd);
-    const targetCopy = target.slice(start, end);
-    for(let i = 0; i < len; ++i)if (thisCopy[i] !== targetCopy[i]) {
+    var x = thisEnd - thisStart;
+    var y = end - start;
+    var len = Math.min(x, y);
+    var thisCopy = this.slice(thisStart, thisEnd);
+    var targetCopy = target.slice(start, end);
+    for(var i = 0; i < len; ++i)if (thisCopy[i] !== targetCopy[i]) {
         x = thisCopy[i];
         y = targetCopy[i];
         break;
@@ -27259,9 +27309,9 @@ function bidirectionalIndexOf(buffer, val, byteOffset, encoding, dir) {
     throw new TypeError("val must be string, number or Buffer");
 }
 function arrayIndexOf(arr, val, byteOffset, encoding, dir) {
-    let indexSize = 1;
-    let arrLength = arr.length;
-    let valLength = val.length;
+    var indexSize = 1;
+    var arrLength = arr.length;
+    var valLength = val.length;
     if (encoding !== undefined) {
         encoding = String(encoding).toLowerCase();
         if (encoding === "ucs2" || encoding === "ucs-2" || encoding === "utf16le" || encoding === "utf-16le") {
@@ -27276,9 +27326,9 @@ function arrayIndexOf(arr, val, byteOffset, encoding, dir) {
         if (indexSize === 1) return buf[i];
         else return buf.readUInt16BE(i * indexSize);
     }
-    let i;
+    var i;
     if (dir) {
-        let foundIndex = -1;
+        var foundIndex = -1;
         for(i = byteOffset; i < arrLength; i++)if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
             if (foundIndex === -1) foundIndex = i;
             if (i - foundIndex + 1 === valLength) return foundIndex * indexSize;
@@ -27289,8 +27339,8 @@ function arrayIndexOf(arr, val, byteOffset, encoding, dir) {
     } else {
         if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength;
         for(i = byteOffset; i >= 0; i--){
-            let found = true;
-            for(let j = 0; j < valLength; j++)if (read(arr, i + j) !== read(val, j)) {
+            var found = true;
+            for(var j = 0; j < valLength; j++)if (read(arr, i + j) !== read(val, j)) {
                 found = false;
                 break;
             }
@@ -27310,17 +27360,16 @@ Buffer.prototype.lastIndexOf = function lastIndexOf(val, byteOffset, encoding) {
 };
 function hexWrite(buf, string, offset, length) {
     offset = Number(offset) || 0;
-    const remaining = buf.length - offset;
+    var remaining = buf.length - offset;
     if (!length) length = remaining;
     else {
         length = Number(length);
         if (length > remaining) length = remaining;
     }
-    const strLen = string.length;
+    var strLen = string.length;
     if (length > strLen / 2) length = strLen / 2;
-    let i;
-    for(i = 0; i < length; ++i){
-        const parsed = parseInt(string.substr(i * 2, 2), 16);
+    for(var i = 0; i < length; ++i){
+        var parsed = parseInt(string.substr(i * 2, 2), 16);
         if (numberIsNaN(parsed)) return i;
         buf[offset + i] = parsed;
     }
@@ -27360,11 +27409,11 @@ Buffer.prototype.write = function write(string, offset, length, encoding) {
             length = undefined;
         }
     } else throw new Error("Buffer.write(string, encoding, offset[, length]) is no longer supported");
-    const remaining = this.length - offset;
+    var remaining = this.length - offset;
     if (length === undefined || length > remaining) length = remaining;
     if (string.length > 0 && (length < 0 || offset < 0) || offset > this.length) throw new RangeError("Attempt to write outside buffer bounds");
     if (!encoding) encoding = "utf8";
-    let loweredCase = false;
+    var loweredCase = false;
     for(;;)switch(encoding){
         case "hex":
             return hexWrite(this, string, offset, length);
@@ -27401,14 +27450,14 @@ function base64Slice(buf, start, end) {
 }
 function utf8Slice(buf, start, end) {
     end = Math.min(buf.length, end);
-    const res = [];
-    let i = start;
+    var res = [];
+    var i = start;
     while(i < end){
-        const firstByte = buf[i];
-        let codePoint = null;
-        let bytesPerSequence = firstByte > 0xEF ? 4 : firstByte > 0xDF ? 3 : firstByte > 0xBF ? 2 : 1;
+        var firstByte = buf[i];
+        var codePoint = null;
+        var bytesPerSequence = firstByte > 0xEF ? 4 : firstByte > 0xDF ? 3 : firstByte > 0xBF ? 2 : 1;
         if (i + bytesPerSequence <= end) {
-            let secondByte, thirdByte, fourthByte, tempCodePoint;
+            var secondByte, thirdByte, fourthByte, tempCodePoint;
             switch(bytesPerSequence){
                 case 1:
                     if (firstByte < 0x80) codePoint = firstByte;
@@ -27457,46 +27506,46 @@ function utf8Slice(buf, start, end) {
 // Based on http://stackoverflow.com/a/22747272/680742, the browser with
 // the lowest limit is Chrome, with 0x10000 args.
 // We go 1 magnitude less, for safety
-const MAX_ARGUMENTS_LENGTH = 0x1000;
+var MAX_ARGUMENTS_LENGTH = 0x1000;
 function decodeCodePointsArray(codePoints) {
-    const len = codePoints.length;
+    var len = codePoints.length;
     if (len <= MAX_ARGUMENTS_LENGTH) return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
     ;
     // Decode in chunks to avoid "call stack size exceeded".
-    let res = "";
-    let i = 0;
+    var res = "";
+    var i = 0;
     while(i < len)res += String.fromCharCode.apply(String, codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH));
     return res;
 }
 function asciiSlice(buf, start, end) {
-    let ret = "";
+    var ret = "";
     end = Math.min(buf.length, end);
-    for(let i = start; i < end; ++i)ret += String.fromCharCode(buf[i] & 0x7F);
+    for(var i = start; i < end; ++i)ret += String.fromCharCode(buf[i] & 0x7F);
     return ret;
 }
 function latin1Slice(buf, start, end) {
-    let ret = "";
+    var ret = "";
     end = Math.min(buf.length, end);
-    for(let i = start; i < end; ++i)ret += String.fromCharCode(buf[i]);
+    for(var i = start; i < end; ++i)ret += String.fromCharCode(buf[i]);
     return ret;
 }
 function hexSlice(buf, start, end) {
-    const len = buf.length;
+    var len = buf.length;
     if (!start || start < 0) start = 0;
     if (!end || end < 0 || end > len) end = len;
-    let out = "";
-    for(let i = start; i < end; ++i)out += hexSliceLookupTable[buf[i]];
+    var out = "";
+    for(var i = start; i < end; ++i)out += hexSliceLookupTable[buf[i]];
     return out;
 }
 function utf16leSlice(buf, start, end) {
-    const bytes = buf.slice(start, end);
-    let res = "";
+    var bytes = buf.slice(start, end);
+    var res = "";
     // If bytes.length is odd, the last 8 bits must be ignored (same as node.js)
-    for(let i = 0; i < bytes.length - 1; i += 2)res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256);
+    for(var i = 0; i < bytes.length - 1; i += 2)res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256);
     return res;
 }
 Buffer.prototype.slice = function slice(start, end) {
-    const len = this.length;
+    var len = this.length;
     start = ~~start;
     end = end === undefined ? len : ~~end;
     if (start < 0) {
@@ -27508,7 +27557,7 @@ Buffer.prototype.slice = function slice(start, end) {
         if (end < 0) end = 0;
     } else if (end > len) end = len;
     if (end < start) end = start;
-    const newBuf = this.subarray(start, end);
+    var newBuf = this.subarray(start, end);
     // Return an augmented `Uint8Array` instance
     Object.setPrototypeOf(newBuf, Buffer.prototype);
     return newBuf;
@@ -27523,9 +27572,9 @@ Buffer.prototype.readUintLE = Buffer.prototype.readUIntLE = function readUIntLE(
     offset = offset >>> 0;
     byteLength = byteLength >>> 0;
     if (!noAssert) checkOffset(offset, byteLength, this.length);
-    let val = this[offset];
-    let mul = 1;
-    let i = 0;
+    var val = this[offset];
+    var mul = 1;
+    var i = 0;
     while(++i < byteLength && (mul *= 0x100))val += this[offset + i] * mul;
     return val;
 };
@@ -27533,8 +27582,8 @@ Buffer.prototype.readUintBE = Buffer.prototype.readUIntBE = function readUIntBE(
     offset = offset >>> 0;
     byteLength = byteLength >>> 0;
     if (!noAssert) checkOffset(offset, byteLength, this.length);
-    let val = this[offset + --byteLength];
-    let mul = 1;
+    var val = this[offset + --byteLength];
+    var mul = 1;
     while(byteLength > 0 && (mul *= 0x100))val += this[offset + --byteLength] * mul;
     return val;
 };
@@ -27563,33 +27612,13 @@ Buffer.prototype.readUint32BE = Buffer.prototype.readUInt32BE = function readUIn
     if (!noAssert) checkOffset(offset, 4, this.length);
     return this[offset] * 0x1000000 + (this[offset + 1] << 16 | this[offset + 2] << 8 | this[offset + 3]);
 };
-Buffer.prototype.readBigUInt64LE = defineBigIntMethod(function readBigUInt64LE(offset) {
-    offset = offset >>> 0;
-    validateNumber(offset, "offset");
-    const first = this[offset];
-    const last = this[offset + 7];
-    if (first === undefined || last === undefined) boundsError(offset, this.length - 8);
-    const lo = first + this[++offset] * 256 + this[++offset] * 2 ** 16 + this[++offset] * 2 ** 24;
-    const hi = this[++offset] + this[++offset] * 256 + this[++offset] * 2 ** 16 + last * 2 ** 24;
-    return BigInt(lo) + (BigInt(hi) << BigInt(32));
-});
-Buffer.prototype.readBigUInt64BE = defineBigIntMethod(function readBigUInt64BE(offset) {
-    offset = offset >>> 0;
-    validateNumber(offset, "offset");
-    const first = this[offset];
-    const last = this[offset + 7];
-    if (first === undefined || last === undefined) boundsError(offset, this.length - 8);
-    const hi = first * 2 ** 24 + this[++offset] * 2 ** 16 + this[++offset] * 256 + this[++offset];
-    const lo = this[++offset] * 2 ** 24 + this[++offset] * 2 ** 16 + this[++offset] * 256 + last;
-    return (BigInt(hi) << BigInt(32)) + BigInt(lo);
-});
 Buffer.prototype.readIntLE = function readIntLE(offset, byteLength, noAssert) {
     offset = offset >>> 0;
     byteLength = byteLength >>> 0;
     if (!noAssert) checkOffset(offset, byteLength, this.length);
-    let val = this[offset];
-    let mul = 1;
-    let i = 0;
+    var val = this[offset];
+    var mul = 1;
+    var i = 0;
     while(++i < byteLength && (mul *= 0x100))val += this[offset + i] * mul;
     mul *= 0x80;
     if (val >= mul) val -= Math.pow(2, 8 * byteLength);
@@ -27599,9 +27628,9 @@ Buffer.prototype.readIntBE = function readIntBE(offset, byteLength, noAssert) {
     offset = offset >>> 0;
     byteLength = byteLength >>> 0;
     if (!noAssert) checkOffset(offset, byteLength, this.length);
-    let i = byteLength;
-    let mul = 1;
-    let val = this[offset + --i];
+    var i = byteLength;
+    var mul = 1;
+    var val = this[offset + --i];
     while(i > 0 && (mul *= 0x100))val += this[offset + --i] * mul;
     mul *= 0x80;
     if (val >= mul) val -= Math.pow(2, 8 * byteLength);
@@ -27616,13 +27645,13 @@ Buffer.prototype.readInt8 = function readInt8(offset, noAssert) {
 Buffer.prototype.readInt16LE = function readInt16LE(offset, noAssert) {
     offset = offset >>> 0;
     if (!noAssert) checkOffset(offset, 2, this.length);
-    const val = this[offset] | this[offset + 1] << 8;
+    var val = this[offset] | this[offset + 1] << 8;
     return val & 0x8000 ? val | 0xFFFF0000 : val;
 };
 Buffer.prototype.readInt16BE = function readInt16BE(offset, noAssert) {
     offset = offset >>> 0;
     if (!noAssert) checkOffset(offset, 2, this.length);
-    const val = this[offset + 1] | this[offset] << 8;
+    var val = this[offset + 1] | this[offset] << 8;
     return val & 0x8000 ? val | 0xFFFF0000 : val;
 };
 Buffer.prototype.readInt32LE = function readInt32LE(offset, noAssert) {
@@ -27635,26 +27664,6 @@ Buffer.prototype.readInt32BE = function readInt32BE(offset, noAssert) {
     if (!noAssert) checkOffset(offset, 4, this.length);
     return this[offset] << 24 | this[offset + 1] << 16 | this[offset + 2] << 8 | this[offset + 3];
 };
-Buffer.prototype.readBigInt64LE = defineBigIntMethod(function readBigInt64LE(offset) {
-    offset = offset >>> 0;
-    validateNumber(offset, "offset");
-    const first = this[offset];
-    const last = this[offset + 7];
-    if (first === undefined || last === undefined) boundsError(offset, this.length - 8);
-    const val = this[offset + 4] + this[offset + 5] * 256 + this[offset + 6] * 2 ** 16 + (last << 24 // Overflow
-    );
-    return (BigInt(val) << BigInt(32)) + BigInt(first + this[++offset] * 256 + this[++offset] * 2 ** 16 + this[++offset] * 2 ** 24);
-});
-Buffer.prototype.readBigInt64BE = defineBigIntMethod(function readBigInt64BE(offset) {
-    offset = offset >>> 0;
-    validateNumber(offset, "offset");
-    const first = this[offset];
-    const last = this[offset + 7];
-    if (first === undefined || last === undefined) boundsError(offset, this.length - 8);
-    const val = (first << 24) + // Overflow
-    this[++offset] * 2 ** 16 + this[++offset] * 256 + this[++offset];
-    return (BigInt(val) << BigInt(32)) + BigInt(this[++offset] * 2 ** 24 + this[++offset] * 2 ** 16 + this[++offset] * 256 + last);
-});
 Buffer.prototype.readFloatLE = function readFloatLE(offset, noAssert) {
     offset = offset >>> 0;
     if (!noAssert) checkOffset(offset, 4, this.length);
@@ -27685,11 +27694,11 @@ Buffer.prototype.writeUintLE = Buffer.prototype.writeUIntLE = function writeUInt
     offset = offset >>> 0;
     byteLength = byteLength >>> 0;
     if (!noAssert) {
-        const maxBytes = Math.pow(2, 8 * byteLength) - 1;
+        var maxBytes = Math.pow(2, 8 * byteLength) - 1;
         checkInt(this, value, offset, byteLength, maxBytes, 0);
     }
-    let mul = 1;
-    let i = 0;
+    var mul = 1;
+    var i = 0;
     this[offset] = value & 0xFF;
     while(++i < byteLength && (mul *= 0x100))this[offset + i] = value / mul & 0xFF;
     return offset + byteLength;
@@ -27699,11 +27708,11 @@ Buffer.prototype.writeUintBE = Buffer.prototype.writeUIntBE = function writeUInt
     offset = offset >>> 0;
     byteLength = byteLength >>> 0;
     if (!noAssert) {
-        const maxBytes = Math.pow(2, 8 * byteLength) - 1;
+        var maxBytes = Math.pow(2, 8 * byteLength) - 1;
         checkInt(this, value, offset, byteLength, maxBytes, 0);
     }
-    let i = byteLength - 1;
-    let mul = 1;
+    var i = byteLength - 1;
+    var mul = 1;
     this[offset + i] = value & 0xFF;
     while(--i >= 0 && (mul *= 0x100))this[offset + i] = value / mul & 0xFF;
     return offset + byteLength;
@@ -27751,62 +27760,16 @@ Buffer.prototype.writeUint32BE = Buffer.prototype.writeUInt32BE = function write
     this[offset + 3] = value & 0xff;
     return offset + 4;
 };
-function wrtBigUInt64LE(buf, value, offset, min, max) {
-    checkIntBI(value, min, max, buf, offset, 7);
-    let lo = Number(value & BigInt(0xffffffff));
-    buf[offset++] = lo;
-    lo = lo >> 8;
-    buf[offset++] = lo;
-    lo = lo >> 8;
-    buf[offset++] = lo;
-    lo = lo >> 8;
-    buf[offset++] = lo;
-    let hi = Number(value >> BigInt(32) & BigInt(0xffffffff));
-    buf[offset++] = hi;
-    hi = hi >> 8;
-    buf[offset++] = hi;
-    hi = hi >> 8;
-    buf[offset++] = hi;
-    hi = hi >> 8;
-    buf[offset++] = hi;
-    return offset;
-}
-function wrtBigUInt64BE(buf, value, offset, min, max) {
-    checkIntBI(value, min, max, buf, offset, 7);
-    let lo = Number(value & BigInt(0xffffffff));
-    buf[offset + 7] = lo;
-    lo = lo >> 8;
-    buf[offset + 6] = lo;
-    lo = lo >> 8;
-    buf[offset + 5] = lo;
-    lo = lo >> 8;
-    buf[offset + 4] = lo;
-    let hi = Number(value >> BigInt(32) & BigInt(0xffffffff));
-    buf[offset + 3] = hi;
-    hi = hi >> 8;
-    buf[offset + 2] = hi;
-    hi = hi >> 8;
-    buf[offset + 1] = hi;
-    hi = hi >> 8;
-    buf[offset] = hi;
-    return offset + 8;
-}
-Buffer.prototype.writeBigUInt64LE = defineBigIntMethod(function writeBigUInt64LE(value, offset = 0) {
-    return wrtBigUInt64LE(this, value, offset, BigInt(0), BigInt("0xffffffffffffffff"));
-});
-Buffer.prototype.writeBigUInt64BE = defineBigIntMethod(function writeBigUInt64BE(value, offset = 0) {
-    return wrtBigUInt64BE(this, value, offset, BigInt(0), BigInt("0xffffffffffffffff"));
-});
 Buffer.prototype.writeIntLE = function writeIntLE(value, offset, byteLength, noAssert) {
     value = +value;
     offset = offset >>> 0;
     if (!noAssert) {
-        const limit = Math.pow(2, 8 * byteLength - 1);
+        var limit = Math.pow(2, 8 * byteLength - 1);
         checkInt(this, value, offset, byteLength, limit - 1, -limit);
     }
-    let i = 0;
-    let mul = 1;
-    let sub = 0;
+    var i = 0;
+    var mul = 1;
+    var sub = 0;
     this[offset] = value & 0xFF;
     while(++i < byteLength && (mul *= 0x100)){
         if (value < 0 && sub === 0 && this[offset + i - 1] !== 0) sub = 1;
@@ -27818,12 +27781,12 @@ Buffer.prototype.writeIntBE = function writeIntBE(value, offset, byteLength, noA
     value = +value;
     offset = offset >>> 0;
     if (!noAssert) {
-        const limit = Math.pow(2, 8 * byteLength - 1);
+        var limit = Math.pow(2, 8 * byteLength - 1);
         checkInt(this, value, offset, byteLength, limit - 1, -limit);
     }
-    let i = byteLength - 1;
-    let mul = 1;
-    let sub = 0;
+    var i = byteLength - 1;
+    var mul = 1;
+    var sub = 0;
     this[offset + i] = value & 0xFF;
     while(--i >= 0 && (mul *= 0x100)){
         if (value < 0 && sub === 0 && this[offset + i + 1] !== 0) sub = 1;
@@ -27876,12 +27839,6 @@ Buffer.prototype.writeInt32BE = function writeInt32BE(value, offset, noAssert) {
     this[offset + 3] = value & 0xff;
     return offset + 4;
 };
-Buffer.prototype.writeBigInt64LE = defineBigIntMethod(function writeBigInt64LE(value, offset = 0) {
-    return wrtBigUInt64LE(this, value, offset, -BigInt("0x8000000000000000"), BigInt("0x7fffffffffffffff"));
-});
-Buffer.prototype.writeBigInt64BE = defineBigIntMethod(function writeBigInt64BE(value, offset = 0) {
-    return wrtBigUInt64BE(this, value, offset, -BigInt("0x8000000000000000"), BigInt("0x7fffffffffffffff"));
-});
 function checkIEEE754(buf, value, offset, ext, max, min) {
     if (offset + ext > buf.length) throw new RangeError("Index out of range");
     if (offset < 0) throw new RangeError("Index out of range");
@@ -27930,7 +27887,7 @@ Buffer.prototype.copy = function copy(target, targetStart, start, end) {
     // Are we oob?
     if (end > this.length) end = this.length;
     if (target.length - targetStart < end - start) end = target.length - targetStart + start;
-    const len = end - start;
+    var len = end - start;
     if (this === target && typeof Uint8Array.prototype.copyWithin === "function") // Use built-in when available, missing from IE11
     this.copyWithin(targetStart, start, end);
     else Uint8Array.prototype.set.call(target, this.subarray(start, end), targetStart);
@@ -27954,7 +27911,7 @@ Buffer.prototype.fill = function fill(val, start, end, encoding) {
         if (encoding !== undefined && typeof encoding !== "string") throw new TypeError("encoding must be a string");
         if (typeof encoding === "string" && !Buffer.isEncoding(encoding)) throw new TypeError("Unknown encoding: " + encoding);
         if (val.length === 1) {
-            const code = val.charCodeAt(0);
+            var code = val.charCodeAt(0);
             if (encoding === "utf8" && code < 128 || encoding === "latin1") // Fast path: If `val` fits into a single byte, use that numeric value.
             val = code;
         }
@@ -27966,112 +27923,19 @@ Buffer.prototype.fill = function fill(val, start, end, encoding) {
     start = start >>> 0;
     end = end === undefined ? this.length : end >>> 0;
     if (!val) val = 0;
-    let i;
+    var i;
     if (typeof val === "number") for(i = start; i < end; ++i)this[i] = val;
     else {
-        const bytes = Buffer.isBuffer(val) ? val : Buffer.from(val, encoding);
-        const len = bytes.length;
+        var bytes = Buffer.isBuffer(val) ? val : Buffer.from(val, encoding);
+        var len = bytes.length;
         if (len === 0) throw new TypeError('The value "' + val + '" is invalid for argument "value"');
         for(i = 0; i < end - start; ++i)this[i + start] = bytes[i % len];
     }
     return this;
 };
-// CUSTOM ERRORS
-// =============
-// Simplified versions from Node, changed for Buffer-only usage
-const errors = {};
-function E(sym, getMessage, Base) {
-    errors[sym] = class NodeError extends Base {
-        constructor(){
-            super();
-            Object.defineProperty(this, "message", {
-                value: getMessage.apply(this, arguments),
-                writable: true,
-                configurable: true
-            });
-            // Add the error code to the name to include it in the stack trace.
-            this.name = `${this.name} [${sym}]`;
-            // Access the stack to generate the error message including the error code
-            // from the name.
-            this.stack // eslint-disable-line no-unused-expressions
-            ;
-            // Reset the name to the actual name.
-            delete this.name;
-        }
-        get code() {
-            return sym;
-        }
-        set code(value) {
-            Object.defineProperty(this, "code", {
-                configurable: true,
-                enumerable: true,
-                value,
-                writable: true
-            });
-        }
-        toString() {
-            return `${this.name} [${sym}]: ${this.message}`;
-        }
-    };
-}
-E("ERR_BUFFER_OUT_OF_BOUNDS", function(name) {
-    if (name) return `${name} is outside of buffer bounds`;
-    return "Attempt to access memory outside buffer bounds";
-}, RangeError);
-E("ERR_INVALID_ARG_TYPE", function(name, actual) {
-    return `The "${name}" argument must be of type number. Received type ${typeof actual}`;
-}, TypeError);
-E("ERR_OUT_OF_RANGE", function(str, range, input) {
-    let msg = `The value of "${str}" is out of range.`;
-    let received = input;
-    if (Number.isInteger(input) && Math.abs(input) > 2 ** 32) received = addNumericalSeparator(String(input));
-    else if (typeof input === "bigint") {
-        received = String(input);
-        if (input > BigInt(2) ** BigInt(32) || input < -(BigInt(2) ** BigInt(32))) received = addNumericalSeparator(received);
-        received += "n";
-    }
-    msg += ` It must be ${range}. Received ${received}`;
-    return msg;
-}, RangeError);
-function addNumericalSeparator(val) {
-    let res = "";
-    let i = val.length;
-    const start = val[0] === "-" ? 1 : 0;
-    for(; i >= start + 4; i -= 3)res = `_${val.slice(i - 3, i)}${res}`;
-    return `${val.slice(0, i)}${res}`;
-}
-// CHECK FUNCTIONS
-// ===============
-function checkBounds(buf, offset, byteLength) {
-    validateNumber(offset, "offset");
-    if (buf[offset] === undefined || buf[offset + byteLength] === undefined) boundsError(offset, buf.length - (byteLength + 1));
-}
-function checkIntBI(value, min, max, buf, offset, byteLength) {
-    if (value > max || value < min) {
-        const n = typeof min === "bigint" ? "n" : "";
-        let range;
-        if (byteLength > 3) {
-            if (min === 0 || min === BigInt(0)) range = `>= 0${n} and < 2${n} ** ${(byteLength + 1) * 8}${n}`;
-            else range = `>= -(2${n} ** ${(byteLength + 1) * 8 - 1}${n}) and < 2 ** ` + `${(byteLength + 1) * 8 - 1}${n}`;
-        } else range = `>= ${min}${n} and <= ${max}${n}`;
-        throw new errors.ERR_OUT_OF_RANGE("value", range, value);
-    }
-    checkBounds(buf, offset, byteLength);
-}
-function validateNumber(value, name) {
-    if (typeof value !== "number") throw new errors.ERR_INVALID_ARG_TYPE(name, "number", value);
-}
-function boundsError(value, length, type) {
-    if (Math.floor(value) !== value) {
-        validateNumber(value, type);
-        throw new errors.ERR_OUT_OF_RANGE(type || "offset", "an integer", value);
-    }
-    if (length < 0) throw new errors.ERR_BUFFER_OUT_OF_BOUNDS();
-    throw new errors.ERR_OUT_OF_RANGE(type || "offset", `>= ${type ? 1 : 0} and <= ${length}`, value);
-}
 // HELPER FUNCTIONS
 // ================
-const INVALID_BASE64_RE = /[^+/0-9A-Za-z-_]/g;
+var INVALID_BASE64_RE = /[^+/0-9A-Za-z-_]/g;
 function base64clean(str) {
     // Node takes equal signs as end of the Base64 encoding
     str = str.split("=")[0];
@@ -28085,11 +27949,11 @@ function base64clean(str) {
 }
 function utf8ToBytes(string, units) {
     units = units || Infinity;
-    let codePoint;
-    const length = string.length;
-    let leadSurrogate = null;
-    const bytes = [];
-    for(let i = 0; i < length; ++i){
+    var codePoint;
+    var length = string.length;
+    var leadSurrogate = null;
+    var bytes = [];
+    for(var i = 0; i < length; ++i){
         codePoint = string.charCodeAt(i);
         // is surrogate component
         if (codePoint > 0xD7FF && codePoint < 0xE000) {
@@ -28140,15 +28004,15 @@ function utf8ToBytes(string, units) {
     return bytes;
 }
 function asciiToBytes(str) {
-    const byteArray = [];
-    for(let i = 0; i < str.length; ++i)// Node's code seems to be doing this and not & 0x7F..
+    var byteArray = [];
+    for(var i = 0; i < str.length; ++i)// Node's code seems to be doing this and not & 0x7F..
     byteArray.push(str.charCodeAt(i) & 0xFF);
     return byteArray;
 }
 function utf16leToBytes(str, units) {
-    let c, hi, lo;
-    const byteArray = [];
-    for(let i = 0; i < str.length; ++i){
+    var c, hi, lo;
+    var byteArray = [];
+    for(var i = 0; i < str.length; ++i){
         if ((units -= 2) < 0) break;
         c = str.charCodeAt(i);
         hi = c >> 8;
@@ -28162,8 +28026,7 @@ function base64ToBytes(str) {
     return base64.toByteArray(base64clean(str));
 }
 function blitBuffer(src, dst, offset, length) {
-    let i;
-    for(i = 0; i < length; ++i){
+    for(var i = 0; i < length; ++i){
         if (i + offset >= dst.length || i >= src.length) break;
         dst[i + offset] = src[i];
     }
@@ -28182,24 +28045,17 @@ function numberIsNaN(obj) {
 }
 // Create lookup table for `toString('hex')`
 // See: https://github.com/feross/buffer/issues/219
-const hexSliceLookupTable = function() {
-    const alphabet = "0123456789abcdef";
-    const table = new Array(256);
-    for(let i = 0; i < 16; ++i){
-        const i16 = i * 16;
-        for(let j = 0; j < 16; ++j)table[i16 + j] = alphabet[i] + alphabet[j];
+var hexSliceLookupTable = function() {
+    var alphabet = "0123456789abcdef";
+    var table = new Array(256);
+    for(var i = 0; i < 16; ++i){
+        var i16 = i * 16;
+        for(var j = 0; j < 16; ++j)table[i16 + j] = alphabet[i] + alphabet[j];
     }
     return table;
 }();
-// Return not function with Error if BigInt not supported
-function defineBigIntMethod(fn) {
-    return typeof BigInt === "undefined" ? BufferBigIntNotDefined : fn;
-}
-function BufferBigIntNotDefined() {
-    throw new Error("BigInt not supported");
-}
 
-},{"base64-js":"eIiSV","ieee754":"cO95r"}],"eIiSV":[function(require,module,exports) {
+},{"3555fa5d71601c03":"eIiSV","c931ef0bd685be12":"cO95r"}],"eIiSV":[function(require,module,exports) {
 "use strict";
 exports.byteLength = byteLength;
 exports.toByteArray = toByteArray;
@@ -28457,17 +28313,13 @@ AxiosError.from = (error, code, config, request, response, customProps)=>{
 };
 exports.default = AxiosError;
 
-},{"../utils.js":"5By4s","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lSnyf":[function(require,module,exports) {
+},{"../utils.js":"5By4s","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aFlee":[function(require,module,exports) {
+// eslint-disable-next-line strict
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-var _formData = require("form-data");
-var _formDataDefault = parcelHelpers.interopDefault(_formData);
-exports.default = (0, _formDataDefault.default);
+exports.default = null;
 
-},{"form-data":"2TZrR","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2TZrR":[function(require,module,exports) {
-/* eslint-env browser */ module.exports = typeof self == "object" ? self.FormData : window.FormData;
-
-},{}],"1VRIM":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1VRIM":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utilsJs = require("./../utils.js");
@@ -28550,7 +28402,7 @@ var _adaptersJsDefault = parcelHelpers.interopDefault(_adaptersJs);
  * @returns {void}
  */ function throwIfCancellationRequested(config) {
     if (config.cancelToken) config.cancelToken.throwIfRequested();
-    if (config.signal && config.signal.aborted) throw new (0, _canceledErrorJsDefault.default)();
+    if (config.signal && config.signal.aborted) throw new (0, _canceledErrorJsDefault.default)(null, config);
 }
 function dispatchRequest(config) {
     throwIfCancellationRequested(config);
@@ -28789,6 +28641,8 @@ var _urlsearchParamsJs = require("./classes/URLSearchParams.js");
 var _urlsearchParamsJsDefault = parcelHelpers.interopDefault(_urlsearchParamsJs);
 var _formDataJs = require("./classes/FormData.js");
 var _formDataJsDefault = parcelHelpers.interopDefault(_formDataJs);
+var _blobJs = require("./classes/Blob.js");
+var _blobJsDefault = parcelHelpers.interopDefault(_blobJs);
 /**
  * Determine if we're running in a standard browser environment
  *
@@ -28810,14 +28664,27 @@ var _formDataJsDefault = parcelHelpers.interopDefault(_formDataJs);
     if (typeof navigator !== "undefined" && ((product = navigator.product) === "ReactNative" || product === "NativeScript" || product === "NS")) return false;
     return typeof window !== "undefined" && typeof document !== "undefined";
 })();
+/**
+ * Determine if we're running in a standard browser webWorker environment
+ *
+ * Although the `isStandardBrowserEnv` method indicates that
+ * `allows axios to run in a web worker`, the WebWorker will still be
+ * filtered out due to its judgment standard
+ * `typeof window !== 'undefined' && typeof document !== 'undefined'`.
+ * This leads to a problem when axios post `FormData` in webWorker
+ */ const isStandardBrowserWebWorkerEnv = (()=>{
+    return typeof WorkerGlobalScope !== "undefined" && // eslint-disable-next-line no-undef
+    self instanceof WorkerGlobalScope && typeof self.importScripts === "function";
+})();
 exports.default = {
     isBrowser: true,
     classes: {
         URLSearchParams: (0, _urlsearchParamsJsDefault.default),
         FormData: (0, _formDataJsDefault.default),
-        Blob
+        Blob: (0, _blobJsDefault.default)
     },
     isStandardBrowserEnv,
+    isStandardBrowserWebWorkerEnv,
     protocols: [
         "http",
         "https",
@@ -28828,7 +28695,7 @@ exports.default = {
     ]
 };
 
-},{"./classes/URLSearchParams.js":"5cIHE","./classes/FormData.js":"7i1jd","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5cIHE":[function(require,module,exports) {
+},{"./classes/URLSearchParams.js":"5cIHE","./classes/FormData.js":"7i1jd","./classes/Blob.js":"8chF6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5cIHE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _axiosURLSearchParamsJs = require("../../../helpers/AxiosURLSearchParams.js");
@@ -28840,7 +28707,13 @@ exports.default = typeof URLSearchParams !== "undefined" ? URLSearchParams : (0,
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 "use strict";
-exports.default = FormData;
+exports.default = typeof FormData !== "undefined" ? FormData : null;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8chF6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+"use strict";
+exports.default = typeof Blob !== "undefined" ? Blob : null;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"01RfH":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -28943,8 +28816,9 @@ function parseTokens(str) {
 function isValidHeaderName(str) {
     return /^[-_a-zA-Z]+$/.test(str.trim());
 }
-function matchHeaderValue(context, value, header, filter) {
+function matchHeaderValue(context, value, header, filter, isHeaderNameFilter) {
     if ((0, _utilsJsDefault.default).isFunction(filter)) return filter.call(this, value, header);
+    if (isHeaderNameFilter) value = header;
     if (!(0, _utilsJsDefault.default).isString(value)) return;
     if ((0, _utilsJsDefault.default).isString(filter)) return value.indexOf(filter) !== -1;
     if ((0, _utilsJsDefault.default).isRegExp(filter)) return filter.test(value);
@@ -29005,7 +28879,7 @@ class AxiosHeaders {
         header = normalizeHeader(header);
         if (header) {
             const key = (0, _utilsJsDefault.default).findKey(this, header);
-            return !!(key && (!matcher || matchHeaderValue(this, this[key], key, matcher)));
+            return !!(key && this[key] !== undefined && (!matcher || matchHeaderValue(this, this[key], key, matcher)));
         }
         return false;
     }
@@ -29026,8 +28900,18 @@ class AxiosHeaders {
         else deleteHeader(header);
         return deleted;
     }
-    clear() {
-        return Object.keys(this).forEach(this.delete.bind(this));
+    clear(matcher) {
+        const keys = Object.keys(this);
+        let i = keys.length;
+        let deleted = false;
+        while(i--){
+            const key = keys[i];
+            if (!matcher || matchHeaderValue(this, this[key], key, matcher, true)) {
+                delete this[key];
+                deleted = true;
+            }
+        }
+        return deleted;
     }
     normalize(format) {
         const self = this;
@@ -29095,7 +28979,8 @@ AxiosHeaders.accessor([
     "Content-Length",
     "Accept",
     "Accept-Encoding",
-    "User-Agent"
+    "User-Agent",
+    "Authorization"
 ]);
 (0, _utilsJsDefault.default).freezeMethods(AxiosHeaders.prototype);
 (0, _utilsJsDefault.default).freezeMethods(AxiosHeaders);
@@ -29247,13 +29132,7 @@ exports.default = {
     adapters: knownAdapters
 };
 
-},{"../utils.js":"5By4s","./http.js":"aFlee","./xhr.js":"ldm57","../core/AxiosError.js":"3u8Tl","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aFlee":[function(require,module,exports) {
-// eslint-disable-next-line strict
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-exports.default = null;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ldm57":[function(require,module,exports) {
+},{"../utils.js":"5By4s","./http.js":"aFlee","./xhr.js":"ldm57","../core/AxiosError.js":"3u8Tl","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ldm57":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _utilsJs = require("./../utils.js");
@@ -29317,7 +29196,7 @@ exports.default = isXHRAdapterSupported && function(config) {
             if (config.cancelToken) config.cancelToken.unsubscribe(onCanceled);
             if (config.signal) config.signal.removeEventListener("abort", onCanceled);
         }
-        if ((0, _utilsJsDefault.default).isFormData(requestData) && (0, _indexJsDefault.default).isStandardBrowserEnv) requestHeaders.setContentType(false); // Let the browser set it
+        if ((0, _utilsJsDefault.default).isFormData(requestData) && ((0, _indexJsDefault.default).isStandardBrowserEnv || (0, _indexJsDefault.default).isStandardBrowserWebWorkerEnv)) requestHeaders.setContentType(false); // Let the browser set it
         let request = new XMLHttpRequest();
         // HTTP basic authentication
         if (config.auth) {
@@ -29785,7 +29664,7 @@ exports.default = {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "VERSION", ()=>VERSION);
-const VERSION = "1.2.0";
+const VERSION = "1.3.4";
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"45wzn":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -29896,7 +29775,80 @@ function isAxiosError(payload) {
 }
 exports.default = isAxiosError;
 
-},{"./../utils.js":"5By4s","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3AD9A":[function(require,module,exports) {
+},{"./../utils.js":"5By4s","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fdR61":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+const HttpStatusCode = {
+    Continue: 100,
+    SwitchingProtocols: 101,
+    Processing: 102,
+    EarlyHints: 103,
+    Ok: 200,
+    Created: 201,
+    Accepted: 202,
+    NonAuthoritativeInformation: 203,
+    NoContent: 204,
+    ResetContent: 205,
+    PartialContent: 206,
+    MultiStatus: 207,
+    AlreadyReported: 208,
+    ImUsed: 226,
+    MultipleChoices: 300,
+    MovedPermanently: 301,
+    Found: 302,
+    SeeOther: 303,
+    NotModified: 304,
+    UseProxy: 305,
+    Unused: 306,
+    TemporaryRedirect: 307,
+    PermanentRedirect: 308,
+    BadRequest: 400,
+    Unauthorized: 401,
+    PaymentRequired: 402,
+    Forbidden: 403,
+    NotFound: 404,
+    MethodNotAllowed: 405,
+    NotAcceptable: 406,
+    ProxyAuthenticationRequired: 407,
+    RequestTimeout: 408,
+    Conflict: 409,
+    Gone: 410,
+    LengthRequired: 411,
+    PreconditionFailed: 412,
+    PayloadTooLarge: 413,
+    UriTooLong: 414,
+    UnsupportedMediaType: 415,
+    RangeNotSatisfiable: 416,
+    ExpectationFailed: 417,
+    ImATeapot: 418,
+    MisdirectedRequest: 421,
+    UnprocessableEntity: 422,
+    Locked: 423,
+    FailedDependency: 424,
+    TooEarly: 425,
+    UpgradeRequired: 426,
+    PreconditionRequired: 428,
+    TooManyRequests: 429,
+    RequestHeaderFieldsTooLarge: 431,
+    UnavailableForLegalReasons: 451,
+    InternalServerError: 500,
+    NotImplemented: 501,
+    BadGateway: 502,
+    ServiceUnavailable: 503,
+    GatewayTimeout: 504,
+    HttpVersionNotSupported: 505,
+    VariantAlsoNegotiates: 506,
+    InsufficientStorage: 507,
+    LoopDetected: 508,
+    NotExtended: 510,
+    NetworkAuthenticationRequired: 511
+};
+Object.entries(HttpStatusCode).forEach(([key, value])=>{
+    HttpStatusCode[value] = key;
+});
+exports.default = HttpStatusCode;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3AD9A":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Accordion", ()=>(0, _accordionDefault.default));
@@ -30491,17 +30443,17 @@ exports.default = CloseButton;
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- */ var ReactIs = require("react-is");
+ */ var ReactIs = require("e54901ebceb30a0d");
 // By explicitly using `prop-types` you are opting into new development behavior.
 // http://fb.me/prop-types-in-prod
 var throwOnDirectAccess = true;
-module.exports = require("./factoryWithTypeCheckers")(ReactIs.isElement, throwOnDirectAccess);
+module.exports = require("202cc98fb1b17a5a")(ReactIs.isElement, throwOnDirectAccess);
 
-},{"react-is":"7EuwB","./factoryWithTypeCheckers":"bBUgD"}],"7EuwB":[function(require,module,exports) {
+},{"e54901ebceb30a0d":"7EuwB","202cc98fb1b17a5a":"bBUgD"}],"7EuwB":[function(require,module,exports) {
 "use strict";
-module.exports = require("./cjs/react-is.development.js");
+module.exports = require("6cd6bd68f591e805");
 
-},{"./cjs/react-is.development.js":"5DsXl"}],"5DsXl":[function(require,module,exports) {
+},{"6cd6bd68f591e805":"5DsXl"}],"5DsXl":[function(require,module,exports) {
 /** @license React v16.13.1
  * react-is.development.js
  *
@@ -30665,11 +30617,11 @@ module.exports = require("./cjs/react-is.development.js");
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */ "use strict";
-var ReactIs = require("react-is");
-var assign = require("object-assign");
-var ReactPropTypesSecret = require("./lib/ReactPropTypesSecret");
-var has = require("./lib/has");
-var checkPropTypes = require("./checkPropTypes");
+var ReactIs = require("90c257869294c55b");
+var assign = require("faec30b77b4dd1d0");
+var ReactPropTypesSecret = require("bb5ecb13681921c5");
+var has = require("111b5456e5c6e6b1");
+var checkPropTypes = require("a395e1d89c467c1b");
 var printWarning = function() {};
 printWarning = function(text) {
     var message = "Warning: " + text;
@@ -31096,7 +31048,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
     return ReactPropTypes;
 };
 
-},{"react-is":"7EuwB","object-assign":"7OXxh","./lib/ReactPropTypesSecret":"jZTZJ","./lib/has":"fqKuf","./checkPropTypes":"5VwyJ"}],"jZTZJ":[function(require,module,exports) {
+},{"90c257869294c55b":"7EuwB","faec30b77b4dd1d0":"7OXxh","bb5ecb13681921c5":"jZTZJ","111b5456e5c6e6b1":"fqKuf","a395e1d89c467c1b":"5VwyJ"}],"jZTZJ":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -31117,9 +31069,9 @@ module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
  * LICENSE file in the root directory of this source tree.
  */ "use strict";
 var printWarning = function() {};
-var ReactPropTypesSecret = require("./lib/ReactPropTypesSecret");
+var ReactPropTypesSecret = require("f78a2d4235dedd15");
 var loggedTypeFailures = {};
-var has = require("./lib/has");
+var has = require("4454ff685f4823e4");
 printWarning = function(text) {
     var message = "Warning: " + text;
     if (typeof console !== "undefined") console.error(message);
@@ -31177,7 +31129,7 @@ printWarning = function(text) {
 };
 module.exports = checkPropTypes;
 
-},{"./lib/ReactPropTypesSecret":"jZTZJ","./lib/has":"fqKuf"}],"2L2I6":[function(require,module,exports) {
+},{"f78a2d4235dedd15":"jZTZJ","4454ff685f4823e4":"fqKuf"}],"2L2I6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "useCol", ()=>useCol);
@@ -33003,7 +32955,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = all;
-var _createChainableTypeChecker = require("./utils/createChainableTypeChecker");
+var _createChainableTypeChecker = require("a45afc4e4755598a");
 var _createChainableTypeChecker2 = _interopRequireDefault(_createChainableTypeChecker);
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
@@ -33026,7 +32978,7 @@ function all() {
 }
 module.exports = exports["default"];
 
-},{"./utils/createChainableTypeChecker":"1m8lT"}],"1m8lT":[function(require,module,exports) {
+},{"a45afc4e4755598a":"1m8lT"}],"1m8lT":[function(require,module,exports) {
 "use strict";
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -37301,7 +37253,7 @@ function invariant(condition, message) {
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6q3tZ":[function(require,module,exports) {
-var isarray = require("isarray");
+var isarray = require("e4772c39039eaf5b");
 /**
  * Expose `pathToRegexp`.
  */ module.exports = pathToRegexp;
@@ -37604,14 +37556,14 @@ module.exports.tokensToRegExp = tokensToRegExp;
     return stringToRegexp(/** @type {string} */ path, /** @type {!Array} */ keys, options);
 }
 
-},{"isarray":"hk7XJ"}],"hk7XJ":[function(require,module,exports) {
+},{"e4772c39039eaf5b":"hk7XJ"}],"hk7XJ":[function(require,module,exports) {
 module.exports = Array.isArray || function(arr) {
     return Object.prototype.toString.call(arr) == "[object Array]";
 };
 
 },{}],"1GfsB":[function(require,module,exports) {
 "use strict";
-var reactIs = require("react-is");
+var reactIs = require("e0add8d3694d582a");
 /**
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
@@ -37693,7 +37645,7 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
 }
 module.exports = hoistNonReactStatics;
 
-},{"react-is":"7EuwB"}],"eBaMl":[function() {},{}],"lIU5g":[function(require,module,exports) {
+},{"e0add8d3694d582a":"7EuwB"}],"eBaMl":[function() {},{}],"lIU5g":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$1e24 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -37846,9 +37798,8 @@ $RefreshReg$(_c, "Menubar");
 }
 },{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","react-router-dom":"cHIiW","./menubar.scss":"I5ugC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"I5ugC":[function() {},{}],"km3Ru":[function(require,module,exports) {
 "use strict";
-var Refresh = require("react-refresh/runtime");
+var Refresh = require("aa969b1a41f96a69");
 function debounce(func, delay) {
-    var args;
     {
         let timeout = undefined;
         let lastTime = 0;
@@ -37978,7 +37929,7 @@ function registerExportsForReactRefresh(module1) {
     }
 }
 
-},{"react-refresh/runtime":"786KC"}],"3U8r7":[function(require,module,exports) {
+},{"aa969b1a41f96a69":"786KC"}],"3U8r7":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$789c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -39745,9 +39696,9 @@ parcelHelpers.exportAll(_exports, exports);
 
 },{"use-sync-external-store/shim":"hyxdF","use-sync-external-store/shim/with-selector":"iDrhg","./utils/reactBatchedUpdates":"5K86X","./utils/batch":"ikw0G","./hooks/useSelector":"l3rFI","./components/connect":"5gOIw","./exports":"iAa1P","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hyxdF":[function(require,module,exports) {
 "use strict";
-module.exports = require("../cjs/use-sync-external-store-shim.development.js");
+module.exports = require("6b56b7ae4f018502");
 
-},{"../cjs/use-sync-external-store-shim.development.js":"khU3l"}],"khU3l":[function(require,module,exports) {
+},{"6b56b7ae4f018502":"khU3l"}],"khU3l":[function(require,module,exports) {
 /**
  * @license React
  * use-sync-external-store-shim.development.js
@@ -39760,7 +39711,7 @@ module.exports = require("../cjs/use-sync-external-store-shim.development.js");
 (function() {
     "use strict";
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
-    var React = require("react");
+    var React = require("75137d5ae3de3571");
     var ReactSharedInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
     function error(format) {
         for(var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++)args[_key2 - 1] = arguments[_key2];
@@ -39912,11 +39863,11 @@ module.exports = require("../cjs/use-sync-external-store-shim.development.js");
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop === "function") __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
 })();
 
-},{"react":"21dqq"}],"iDrhg":[function(require,module,exports) {
+},{"75137d5ae3de3571":"21dqq"}],"iDrhg":[function(require,module,exports) {
 "use strict";
-module.exports = require("../cjs/use-sync-external-store-shim/with-selector.development.js");
+module.exports = require("638b6ea88190ec5f");
 
-},{"../cjs/use-sync-external-store-shim/with-selector.development.js":"vU6Qe"}],"vU6Qe":[function(require,module,exports) {
+},{"638b6ea88190ec5f":"vU6Qe"}],"vU6Qe":[function(require,module,exports) {
 /**
  * @license React
  * use-sync-external-store-shim/with-selector.development.js
@@ -39929,8 +39880,8 @@ module.exports = require("../cjs/use-sync-external-store-shim/with-selector.deve
 (function() {
     "use strict";
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
-    var React = require("react");
-    var shim = require("use-sync-external-store/shim");
+    var React = require("23c45107bfeaf3bc");
+    var shim = require("a7f1b7aea362edf8");
     /**
  * inlined Object.is polyfill to avoid requiring consumers ship their own
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
@@ -40034,7 +39985,7 @@ module.exports = require("../cjs/use-sync-external-store-shim/with-selector.deve
     /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */ if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop === "function") __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
 })();
 
-},{"react":"21dqq","use-sync-external-store/shim":"hyxdF"}],"5K86X":[function(require,module,exports) {
+},{"23c45107bfeaf3bc":"21dqq","a7f1b7aea362edf8":"hyxdF"}],"5K86X":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "unstable_batchedUpdates", ()=>(0, _reactDom.unstable_batchedUpdates));
@@ -40498,9 +40449,9 @@ exports.default = connect;
 
 },{"@babel/runtime/helpers/esm/extends":"fTBFS","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"adHgr","hoist-non-react-statics":"1GfsB","react":"21dqq","react-is":"lb6Ui","../connect/selectorFactory":"e9uH3","../connect/mapDispatchToProps":"5QhPl","../connect/mapStateToProps":"4Hl4c","../connect/mergeProps":"hQpBj","../utils/Subscription":"ieuHT","../utils/useIsomorphicLayoutEffect":"kNbVc","../utils/shallowEqual":"gV5L4","../utils/warning":"cUQUw","./Context":"ji81o","../utils/useSyncExternalStore":"dSsKl","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lb6Ui":[function(require,module,exports) {
 "use strict";
-module.exports = require("./cjs/react-is.development.js");
+module.exports = require("8497c7b6efbd401b");
 
-},{"./cjs/react-is.development.js":"idDA8"}],"idDA8":[function(require,module,exports) {
+},{"8497c7b6efbd401b":"idDA8"}],"idDA8":[function(require,module,exports) {
 /**
  * @license React
  * react-is.development.js
@@ -41358,6 +41309,6 @@ $RefreshReg$(_c, "VisibilityFilterInput");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-redux":"bdVon","react-bootstrap/Form":"iBZ80","../../actions/actions":"biFwH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lJZlQ":[function() {},{}]},["1xC6H","jVvJi","d8Dch"], "d8Dch", "parcelRequireaec4")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-redux":"bdVon","react-bootstrap/Form":"iBZ80","../../actions/actions":"biFwH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lJZlQ":[function() {},{}]},["1xC6H","7a1Sg","d8Dch"], "d8Dch", "parcelRequireaec4")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
