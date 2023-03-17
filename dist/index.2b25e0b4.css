@@ -19,6 +19,18 @@ a {
 
 
 
+img.movie-poster {
+  width: 432px;
+  height: 600px;
+}
+
+@media (min-width: 320px) and (max-width: 425px) {
+  div img.movie-poster {
+    width: 216px;
+    height: 340px;
+  }
+}
+
 .movie-button {
   color: #f5a9b86e;
 }
@@ -54,18 +66,6 @@ div.card-title.h5, p.card-text, button.movie-button.btn.btn-link {
 
   .card {
     margin: 4px;
-  }
-}
-
-img.movie-poster {
-  width: 432px;
-  height: 600px;
-}
-
-@media (min-width: 320px) and (max-width: 425px) {
-  div img.movie-poster {
-    width: 216px;
-    height: 340px;
   }
 }
 
